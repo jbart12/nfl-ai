@@ -1,0 +1,60 @@
+{
+  "timestamp": "2025-10-26T12:16:25.018824",
+  "sources_tested": [
+    {
+      "source": "NFL.com Stats API",
+      "status": "failed",
+      "endpoints_tested": [
+        {
+          "name": "stats",
+          "url": "https://api.nfl.com/v1/stats",
+          "status": 401
+        },
+        {
+          "name": "teams",
+          "url": "https://api.nfl.com/v1/teams",
+          "status": 401
+        },
+        {
+          "name": "players",
+          "url": "https://api.nfl.com/v1/players",
+          "status": 401
+        }
+      ]
+    },
+    {
+      "source": "Next Gen Stats",
+      "status": "success",
+      "endpoints_tested": [
+        {
+          "name": "passing",
+          "url": "https://nextgenstats.nfl.com/api/statboard/passing",
+          "status": 200
+        },
+        {
+          "name": "rushing",
+          "url": "https://nextgenstats.nfl.com/api/statboard/rushing",
+          "status": 200
+        },
+        {
+          "name": "receiving",
+          "url": "https://nextgenstats.nfl.com/api/statboard/receiving",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "source": "NFL Fantasy API",
+      "status": "failed"
+    }
+  ],
+  "successful": [
+    "Next Gen Stats"
+  ],
+  "failed": [
+    "NFL.com Stats API",
+    "NFL Fantasy API"
+  ],
+  "findings": {},
+  "recommendation": "GO"
+}

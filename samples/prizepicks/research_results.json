@@ -1,0 +1,610 @@
+{
+  "timestamp": "2025-10-26T11:51:36.201278",
+  "endpoints_tested": [
+    {
+      "endpoint": "/projections",
+      "description": "NFL Projections (league_id=7)",
+      "url": "https://api.prizepicks.com/projections",
+      "params": {
+        "league_id": 7,
+        "per_page": 250,
+        "single_stat": "true"
+      },
+      "status": "success",
+      "status_code": 200,
+      "response_size": 7859755,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/prizepicks/projections_league_7.json",
+      "analysis": {
+        "num_projections": 6684,
+        "num_included_entities": 312,
+        "included_entity_types": {
+          "team": 38,
+          "new_player": 228,
+          "game": 9,
+          "projection_type": 2,
+          "stat_type": 33,
+          "league": 1,
+          "duration": 1
+        },
+        "num_unique_stat_types": 33,
+        "stat_types": [
+          "3-PT Attempted",
+          "3-PT Made",
+          "3-PT Made (Combo)",
+          "Assists",
+          "Assists (Combo)",
+          "Assists - 1st 3 Minutes",
+          "Blks+Stls",
+          "Blocked Shots",
+          "Defensive Rebounds",
+          "Dunks",
+          "FG Attempted",
+          "FG Made",
+          "Fantasy Score",
+          "Free Throws Attempted",
+          "Free Throws Made",
+          "Offensive Rebounds",
+          "Personal Fouls",
+          "Points",
+          "Points (Combo)",
+          "Points - 1st 3 Minutes",
+          "Pts+Asts",
+          "Pts+Rebs",
+          "Pts+Rebs+Asts",
+          "Quarters with 3+ Points",
+          "Quarters with 5+ Points",
+          "Rebounds",
+          "Rebounds (Combo)",
+          "Rebounds - 1st 3 Minutes",
+          "Rebs+Asts",
+          "Steals",
+          "Turnovers",
+          "Two Pointers Attempted",
+          "Two Pointers Made"
+        ],
+        "num_unique_positions": 14,
+        "positions": [
+          "C",
+          "C-F",
+          "C/F",
+          "C/G",
+          "F",
+          "F-C",
+          "F-C/G",
+          "F-G",
+          "F/C",
+          "F/G",
+          "G",
+          "G-F",
+          "G/C",
+          "G/F"
+        ],
+        "num_unique_teams": 27,
+        "num_players": 228,
+        "sample_projection_keys": [
+          "type",
+          "id",
+          "attributes",
+          "relationships"
+        ],
+        "sample_attributes_keys": [
+          "adjusted_odds",
+          "board_time",
+          "custom_image",
+          "description",
+          "end_time",
+          "event_type",
+          "flash_sale_line_score",
+          "game_id",
+          "group_key",
+          "hr_20",
+          "in_game",
+          "is_live",
+          "is_live_scored",
+          "is_promo",
+          "line_score",
+          "odds_type",
+          "projection_type",
+          "rank",
+          "refundable",
+          "start_time",
+          "stat_display_name",
+          "stat_type",
+          "status",
+          "today",
+          "tv_channel",
+          "updated_at"
+        ]
+      }
+    },
+    {
+      "endpoint": "/projections",
+      "description": "NFL Projections (league_id=2)",
+      "url": "https://api.prizepicks.com/projections",
+      "params": {
+        "league_id": 2,
+        "per_page": 250,
+        "single_stat": "true"
+      },
+      "status": "success",
+      "status_code": 200,
+      "response_size": 412909,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/prizepicks/projections_league_2.json",
+      "analysis": {
+        "num_projections": 353,
+        "num_included_entities": 46,
+        "included_entity_types": {
+          "projection_type": 1,
+          "new_player": 21,
+          "team": 3,
+          "stat_type": 18,
+          "league": 1,
+          "game": 1,
+          "duration": 1
+        },
+        "num_unique_stat_types": 18,
+        "stat_types": [
+          "1st Inning Runs Allowed",
+          "Doubles",
+          "Earned Runs Allowed",
+          "Hits",
+          "Hits Allowed",
+          "Hits+Runs+RBIs",
+          "Hitter Strikeouts",
+          "Home Runs",
+          "Pitcher Fantasy Score",
+          "Pitcher Strikeouts",
+          "Pitching Outs",
+          "RBIs",
+          "Runs",
+          "Singles",
+          "Stolen Bases",
+          "Total Bases",
+          "Walks",
+          "Walks Allowed"
+        ],
+        "num_unique_positions": 4,
+        "positions": [
+          "C",
+          "IF",
+          "OF",
+          "P"
+        ],
+        "num_unique_teams": 3,
+        "num_players": 21,
+        "sample_projection_keys": [
+          "type",
+          "id",
+          "attributes",
+          "relationships"
+        ],
+        "sample_attributes_keys": [
+          "adjusted_odds",
+          "board_time",
+          "custom_image",
+          "description",
+          "end_time",
+          "event_type",
+          "flash_sale_line_score",
+          "game_id",
+          "group_key",
+          "in_game",
+          "is_live",
+          "is_live_scored",
+          "is_promo",
+          "line_score",
+          "odds_type",
+          "projection_type",
+          "rank",
+          "refundable",
+          "start_time",
+          "stat_display_name",
+          "stat_type",
+          "status",
+          "tv_channel",
+          "updated_at"
+        ]
+      }
+    },
+    {
+      "endpoint": "/projections",
+      "description": "NFL Projections (league_id=9)",
+      "url": "https://api.prizepicks.com/projections",
+      "params": {
+        "league_id": 9,
+        "per_page": 250,
+        "single_stat": "true"
+      },
+      "status": "success",
+      "status_code": 200,
+      "response_size": 6678571,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/prizepicks/projections_league_9.json",
+      "analysis": {
+        "num_projections": 5529,
+        "num_included_entities": 601,
+        "included_entity_types": {
+          "new_player": 490,
+          "stat_type": 55,
+          "team": 40,
+          "game": 12,
+          "duration": 1,
+          "projection_type": 2,
+          "league": 1
+        },
+        "num_unique_stat_types": 55,
+        "stat_types": [
+          "Assists",
+          "Completion Percentage",
+          "Completions in First 10 Pass Attempts",
+          "FG Made",
+          "FG Made (Combo)",
+          "Fantasy Score",
+          "Field Goal Yards (Combo)",
+          "Halves with 100+ Pass Yards",
+          "Halves with 150+ Pass Yards",
+          "Halves with 25+ Receiving Yards",
+          "Halves with 25+ Rush Yards",
+          "Halves with 40+ Receiving Yards",
+          "Halves with 50+ Rush Yards",
+          "INT",
+          "Kicking Points",
+          "Longest Completion",
+          "Longest FG Made Yds (Combo)",
+          "Longest Reception",
+          "Longest Rush",
+          "PAT Made",
+          "Pass Attempts",
+          "Pass Completions",
+          "Pass TDs",
+          "Pass Yards",
+          "Pass Yards (Combo)",
+          "Pass+Rush Yds",
+          "Passing Yards in First 10 Attempts",
+          "Punts",
+          "Quarters with 1+ Reception",
+          "Quarters with 10+ Receiving Yards",
+          "Quarters with 10+ Rush Yards",
+          "Quarters with 20+ Pass Yards",
+          "Quarters with 25+ Pass Yards",
+          "Quarters with 30+ Pass Yards",
+          "Quarters with 5+ Receiving Yards",
+          "Quarters with 5+ Rush Yards",
+          "Rec Targets",
+          "Receiving Yards",
+          "Receiving Yards (Combo)",
+          "Receiving Yards in First 2 Receptions",
+          "Receptions",
+          "Rush Attempts",
+          "Rush Yards",
+          "Rush Yards (Combo)",
+          "Rush Yards in First 5 Attempts",
+          "Rush+Rec TDs",
+          "Rush+Rec TDs (Combo)",
+          "Rush+Rec Yds",
+          "Sacks",
+          "Sacks Taken",
+          "Shortest FG Made Yds (Combo)",
+          "Tackles+Ast",
+          "Yards on First Pass Completion",
+          "Yards on First Reception",
+          "Yards on First Rush Attempt"
+        ],
+        "num_unique_positions": 24,
+        "positions": [
+          "CB",
+          "DB",
+          "DE",
+          "DL",
+          "DT",
+          "FB",
+          "K",
+          "LB",
+          "MLB",
+          "NT",
+          "OLB",
+          "P",
+          "QB",
+          "QB/RB",
+          "RB",
+          "RB/TE",
+          "RB/WR",
+          "SAF",
+          "TE",
+          "TE/WR",
+          "WR",
+          "WR/QB",
+          "WR/RB",
+          "WR/TE"
+        ],
+        "num_unique_teams": 36,
+        "num_players": 490,
+        "sample_projection_keys": [
+          "type",
+          "id",
+          "attributes",
+          "relationships"
+        ],
+        "sample_attributes_keys": [
+          "adjusted_odds",
+          "board_time",
+          "custom_image",
+          "description",
+          "end_time",
+          "event_type",
+          "flash_sale_line_score",
+          "game_id",
+          "group_key",
+          "hr_20",
+          "in_game",
+          "is_live",
+          "is_live_scored",
+          "is_promo",
+          "line_score",
+          "odds_type",
+          "projection_type",
+          "rank",
+          "refundable",
+          "start_time",
+          "stat_display_name",
+          "stat_type",
+          "status",
+          "today",
+          "tv_channel",
+          "updated_at"
+        ]
+      }
+    }
+  ],
+  "successful": [
+    "/projections (league_id=9)"
+  ],
+  "failed": [],
+  "findings": {
+    "nfl_league_id": 9,
+    "position_coverage": {
+      "K": {
+        "count": 246,
+        "stat_types": [
+          "FG Made",
+          "FG Made (Combo)",
+          "Fantasy Score",
+          "Field Goal Yards (Combo)",
+          "Kicking Points",
+          "Longest FG Made Yds (Combo)",
+          "PAT Made",
+          "Shortest FG Made Yds (Combo)"
+        ]
+      },
+      "QB": {
+        "count": 1157,
+        "stat_types": [
+          "Completion Percentage",
+          "Completions in First 10 Pass Attempts",
+          "Fantasy Score",
+          "Halves with 100+ Pass Yards",
+          "Halves with 150+ Pass Yards",
+          "Halves with 25+ Rush Yards",
+          "INT",
+          "Longest Completion",
+          "Longest Rush",
+          "Pass Attempts",
+          "Pass Completions",
+          "Pass TDs",
+          "Pass Yards",
+          "Pass Yards (Combo)",
+          "Pass+Rush Yds",
+          "Passing Yards in First 10 Attempts",
+          "Quarters with 20+ Pass Yards",
+          "Quarters with 25+ Pass Yards",
+          "Quarters with 30+ Pass Yards",
+          "Quarters with 5+ Rush Yards",
+          "Rush Attempts",
+          "Rush Yards",
+          "Rush Yards in First 5 Attempts",
+          "Rush+Rec TDs",
+          "Sacks Taken",
+          "Yards on First Pass Completion"
+        ]
+      },
+      "RB": {
+        "count": 1524,
+        "stat_types": [
+          "Fantasy Score",
+          "Halves with 25+ Receiving Yards",
+          "Halves with 25+ Rush Yards",
+          "Halves with 50+ Rush Yards",
+          "Longest Reception",
+          "Longest Rush",
+          "Quarters with 10+ Rush Yards",
+          "Quarters with 5+ Rush Yards",
+          "Rec Targets",
+          "Receiving Yards",
+          "Receiving Yards in First 2 Receptions",
+          "Receptions",
+          "Rush Attempts",
+          "Rush Yards",
+          "Rush Yards (Combo)",
+          "Rush Yards in First 5 Attempts",
+          "Rush+Rec TDs",
+          "Rush+Rec Yds",
+          "Yards on First Reception",
+          "Yards on First Rush Attempt"
+        ]
+      },
+      "WR": {
+        "count": 1573,
+        "stat_types": [
+          "Fantasy Score",
+          "Halves with 25+ Receiving Yards",
+          "Halves with 40+ Receiving Yards",
+          "Longest Reception",
+          "Quarters with 1+ Reception",
+          "Quarters with 10+ Receiving Yards",
+          "Quarters with 5+ Receiving Yards",
+          "Rec Targets",
+          "Receiving Yards",
+          "Receiving Yards (Combo)",
+          "Receiving Yards in First 2 Receptions",
+          "Receptions",
+          "Rush Attempts",
+          "Rush Yards",
+          "Rush+Rec TDs",
+          "Rush+Rec TDs (Combo)",
+          "Rush+Rec Yds",
+          "Yards on First Reception"
+        ]
+      },
+      "DE": {
+        "count": 59,
+        "stat_types": [
+          "Assists",
+          "Sacks",
+          "Tackles+Ast"
+        ]
+      },
+      "TE": {
+        "count": 711,
+        "stat_types": [
+          "Fantasy Score",
+          "Halves with 25+ Receiving Yards",
+          "Halves with 40+ Receiving Yards",
+          "Longest Reception",
+          "Longest Rush",
+          "Quarters with 1+ Reception",
+          "Quarters with 5+ Receiving Yards",
+          "Rec Targets",
+          "Receiving Yards",
+          "Receiving Yards in First 2 Receptions",
+          "Receptions",
+          "Rush Attempts",
+          "Rush Yards",
+          "Rush+Rec TDs",
+          "Rush+Rec Yds",
+          "Yards on First Reception"
+        ]
+      },
+      "DL": {
+        "count": 33,
+        "stat_types": [
+          "Sacks",
+          "Tackles+Ast"
+        ]
+      },
+      "P": {
+        "count": 24,
+        "stat_types": [
+          "Punts"
+        ]
+      },
+      "SAF": {
+        "count": 20,
+        "stat_types": [
+          "Assists",
+          "Sacks",
+          "Tackles+Ast"
+        ]
+      },
+      "LB": {
+        "count": 77,
+        "stat_types": [
+          "Assists",
+          "Sacks",
+          "Tackles+Ast"
+        ]
+      },
+      "DT": {
+        "count": 41,
+        "stat_types": [
+          "Sacks"
+        ]
+      },
+      "OLB": {
+        "count": 22,
+        "stat_types": [
+          "Assists",
+          "Sacks"
+        ]
+      },
+      "CB": {
+        "count": 13,
+        "stat_types": [
+          "Assists",
+          "Sacks",
+          "Tackles+Ast"
+        ]
+      },
+      "FB": {
+        "count": 9,
+        "stat_types": [
+          "Longest Reception",
+          "Receiving Yards",
+          "Receptions"
+        ]
+      },
+      "DB": {
+        "count": 4,
+        "stat_types": [
+          "Sacks",
+          "Tackles+Ast"
+        ]
+      },
+      "RB/TE": {
+        "count": 1,
+        "stat_types": [
+          "Receiving Yards (Combo)"
+        ]
+      },
+      "QB/RB": {
+        "count": 1,
+        "stat_types": [
+          "Rush+Rec TDs (Combo)"
+        ]
+      },
+      "WR/RB": {
+        "count": 1,
+        "stat_types": [
+          "Rush+Rec TDs (Combo)"
+        ]
+      },
+      "NT": {
+        "count": 4,
+        "stat_types": [
+          "Sacks"
+        ]
+      },
+      "TE/WR": {
+        "count": 2,
+        "stat_types": [
+          "Rush+Rec TDs (Combo)"
+        ]
+      },
+      "RB/WR": {
+        "count": 1,
+        "stat_types": [
+          "Rush+Rec TDs (Combo)"
+        ]
+      },
+      "MLB": {
+        "count": 3,
+        "stat_types": [
+          "Assists",
+          "Sacks"
+        ]
+      },
+      "WR/TE": {
+        "count": 2,
+        "stat_types": [
+          "Receiving Yards (Combo)",
+          "Rush+Rec TDs (Combo)"
+        ]
+      },
+      "WR/QB": {
+        "count": 1,
+        "stat_types": [
+          "Rush+Rec TDs (Combo)"
+        ]
+      }
+    }
+  },
+  "recommendation": "GO"
+}

@@ -1,0 +1,354 @@
+{
+  "timestamp": "2025-10-26T11:42:31.847471",
+  "endpoints_tested": [
+    {
+      "endpoint": "/scoreboard",
+      "description": "Current Week Scoreboard (Live Scores & Game Data)",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "85976",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,HEAD",
+        "Access-Control-Expose-Headers": "content-length,location",
+        "Link": "<scoreboard.json#>; rel=\"describedby\"",
+        "Content-Encoding": "gzip",
+        "Vary": "Accept-Encoding",
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "max-age=8",
+        "Date": "Sun, 26 Oct 2025 16:42:32 GMT",
+        "Connection": "keep-alive"
+      },
+      "response_size": 1113620,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/espn/scoreboard_current.json",
+      "analysis": {
+        "top_level_keys": [
+          "leagues",
+          "season",
+          "week",
+          "events"
+        ],
+        "num_games": 13,
+        "game_keys": [
+          "id",
+          "uid",
+          "date",
+          "name",
+          "shortName",
+          "season",
+          "week",
+          "competitions",
+          "links",
+          "weather",
+          "status"
+        ],
+        "competition_keys": [
+          "id",
+          "uid",
+          "date",
+          "attendance",
+          "type",
+          "timeValid",
+          "neutralSite",
+          "conferenceCompetition",
+          "playByPlayAvailable",
+          "recent",
+          "venue",
+          "competitors",
+          "notes",
+          "status",
+          "broadcasts",
+          "leaders",
+          "format",
+          "tickets",
+          "startDate",
+          "broadcast",
+          "geoBroadcasts",
+          "odds",
+          "highlights"
+        ]
+      }
+    },
+    {
+      "endpoint": "/teams",
+      "description": "All NFL Teams",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "4290",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,HEAD",
+        "Access-Control-Expose-Headers": "content-length,location",
+        "Content-Encoding": "gzip",
+        "Vary": "Accept-Encoding",
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "max-age=5",
+        "Date": "Sun, 26 Oct 2025 16:42:33 GMT",
+        "Connection": "keep-alive"
+      },
+      "response_size": 75981,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/espn/teams_all.json",
+      "analysis": {
+        "top_level_keys": [
+          "sports"
+        ],
+        "num_teams": 32,
+        "team_keys": [
+          "id",
+          "uid",
+          "slug",
+          "abbreviation",
+          "displayName",
+          "shortDisplayName",
+          "name",
+          "nickname",
+          "location",
+          "color",
+          "alternateColor",
+          "isActive",
+          "isAllStar",
+          "logos",
+          "links"
+        ]
+      }
+    },
+    {
+      "endpoint": "/teams/kc",
+      "description": "Team Details (Kansas City Chiefs)",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/kc",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "2814",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,HEAD",
+        "Access-Control-Expose-Headers": "content-length,location",
+        "Link": "<teamSummary.json#>; rel=\"describedby\"",
+        "Content-Encoding": "gzip",
+        "Vary": "Accept-Encoding",
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "max-age=8",
+        "Date": "Sun, 26 Oct 2025 16:42:34 GMT",
+        "Connection": "keep-alive"
+      },
+      "response_size": 20585,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/espn/team_chiefs.json",
+      "analysis": {
+        "top_level_keys": [
+          "team"
+        ]
+      }
+    },
+    {
+      "endpoint": "/teams/kc/roster",
+      "description": "Team Roster (Kansas City Chiefs)",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/kc/roster",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "21353",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,HEAD",
+        "Access-Control-Expose-Headers": "content-length,location",
+        "Link": "<roster.json#>; rel=\"describedby\"",
+        "Content-Encoding": "gzip",
+        "Vary": "Accept-Encoding",
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "max-age=1",
+        "Date": "Sun, 26 Oct 2025 16:42:35 GMT",
+        "Connection": "keep-alive"
+      },
+      "response_size": 256312,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/espn/roster_chiefs.json",
+      "analysis": {
+        "top_level_keys": [
+          "timestamp",
+          "status",
+          "season",
+          "athletes",
+          "coach",
+          "team"
+        ],
+        "num_players": 6,
+        "player_keys": [
+          "position",
+          "items"
+        ]
+      }
+    },
+    {
+      "endpoint": "/teams/phi",
+      "description": "Team Details (Philadelphia Eagles)",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/phi",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "2632",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,HEAD",
+        "Access-Control-Expose-Headers": "content-length,location",
+        "Link": "<teamSummary.json#>; rel=\"describedby\"",
+        "Content-Encoding": "gzip",
+        "Vary": "Accept-Encoding",
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "max-age=6",
+        "Date": "Sun, 26 Oct 2025 16:42:36 GMT",
+        "Connection": "keep-alive"
+      },
+      "response_size": 19604,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/espn/team_eagles.json",
+      "analysis": {
+        "top_level_keys": [
+          "team"
+        ]
+      }
+    },
+    {
+      "endpoint": "/teams/phi/roster",
+      "description": "Team Roster (Philadelphia Eagles)",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/phi/roster",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "21077",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,HEAD",
+        "Access-Control-Expose-Headers": "content-length,location",
+        "Link": "<roster.json#>; rel=\"describedby\"",
+        "Content-Encoding": "gzip",
+        "Vary": "Accept-Encoding",
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "max-age=1",
+        "Date": "Sun, 26 Oct 2025 16:42:38 GMT",
+        "Connection": "keep-alive"
+      },
+      "response_size": 260262,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/espn/roster_eagles.json",
+      "analysis": {
+        "top_level_keys": [
+          "timestamp",
+          "status",
+          "season",
+          "athletes",
+          "coach",
+          "team"
+        ],
+        "num_players": 6,
+        "player_keys": [
+          "position",
+          "items"
+        ]
+      }
+    },
+    {
+      "endpoint": "/teams/kc/statistics",
+      "description": "Team Statistics (Kansas City Chiefs)",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/kc/statistics",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,HEAD",
+        "Access-Control-Expose-Headers": "content-length,location",
+        "Content-Encoding": "gzip",
+        "Vary": "Accept-Encoding",
+        "Accept-Ranges": "bytes",
+        "Content-Length": "12347",
+        "Cache-Control": "max-age=1",
+        "Date": "Sun, 26 Oct 2025 16:42:39 GMT",
+        "Connection": "keep-alive"
+      },
+      "response_size": 94173,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/espn/stats_chiefs.json",
+      "analysis": {
+        "top_level_keys": [
+          "status",
+          "results",
+          "season",
+          "requestedSeason",
+          "team"
+        ]
+      }
+    },
+    {
+      "endpoint": "/news",
+      "description": "NFL News Feed",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/news",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "7302",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,HEAD",
+        "Access-Control-Expose-Headers": "content-length,location",
+        "Link": "<news.json#>; rel=\"describedby\"",
+        "Content-Encoding": "gzip",
+        "Vary": "Accept-Encoding",
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "max-age=7",
+        "Date": "Sun, 26 Oct 2025 16:42:40 GMT",
+        "Connection": "keep-alive"
+      },
+      "response_size": 38296,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/espn/news_feed.json",
+      "analysis": {
+        "top_level_keys": [
+          "header",
+          "link",
+          "articles"
+        ]
+      }
+    },
+    {
+      "endpoint": "/standings",
+      "description": "NFL Standings",
+      "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/standings",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "103",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,HEAD",
+        "Access-Control-Expose-Headers": "content-length,location",
+        "Content-Encoding": "gzip",
+        "Vary": "Accept-Encoding",
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "max-age=1",
+        "Date": "Sun, 26 Oct 2025 16:42:41 GMT",
+        "Connection": "keep-alive"
+      },
+      "response_size": 90,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/espn/standings.json",
+      "analysis": {
+        "top_level_keys": [
+          "fullViewLink"
+        ]
+      }
+    }
+  ],
+  "successful": [
+    "/scoreboard",
+    "/teams",
+    "/teams/kc",
+    "/teams/kc/roster",
+    "/teams/phi",
+    "/teams/phi/roster",
+    "/teams/kc/statistics",
+    "/news",
+    "/standings"
+  ],
+  "failed": [],
+  "findings": {},
+  "recommendation": "GO"
+}

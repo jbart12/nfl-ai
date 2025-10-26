@@ -1,0 +1,1179 @@
+{
+  "team": {
+    "id": "21",
+    "uid": "s:20~l:28~t:21",
+    "slug": "philadelphia-eagles",
+    "location": "Philadelphia",
+    "name": "Eagles",
+    "nickname": "Eagles",
+    "abbreviation": "PHI",
+    "displayName": "Philadelphia Eagles",
+    "shortDisplayName": "Eagles",
+    "color": "06424d",
+    "alternateColor": "000000",
+    "isActive": true,
+    "logos": [
+      {
+        "href": "https://a.espncdn.com/i/teamlogos/nfl/500/phi.png",
+        "width": 500,
+        "height": 500,
+        "alt": "",
+        "rel": [
+          "full",
+          "default"
+        ],
+        "lastUpdated": "2024-06-25T18:55Z"
+      },
+      {
+        "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/phi.png",
+        "width": 500,
+        "height": 500,
+        "alt": "",
+        "rel": [
+          "full",
+          "dark"
+        ],
+        "lastUpdated": "2024-06-25T18:56Z"
+      },
+      {
+        "href": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/phi.png",
+        "width": 500,
+        "height": 500,
+        "alt": "",
+        "rel": [
+          "full",
+          "scoreboard"
+        ],
+        "lastUpdated": "2024-06-25T18:56Z"
+      },
+      {
+        "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/scoreboard/phi.png",
+        "width": 500,
+        "height": 500,
+        "alt": "",
+        "rel": [
+          "full",
+          "scoreboard",
+          "dark"
+        ],
+        "lastUpdated": "2024-06-25T18:56Z"
+      },
+      {
+        "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/primary_logo_on_white_color.png",
+        "width": 4096,
+        "height": 4096,
+        "alt": "",
+        "rel": [
+          "full",
+          "primary_logo_on_white_color"
+        ],
+        "lastUpdated": "2024-12-03T20:48Z"
+      },
+      {
+        "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/primary_logo_on_black_color.png",
+        "width": 4096,
+        "height": 4096,
+        "alt": "",
+        "rel": [
+          "full",
+          "primary_logo_on_black_color"
+        ],
+        "lastUpdated": "2024-12-03T20:48Z"
+      },
+      {
+        "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/primary_logo_on_primary_color.png",
+        "width": 4096,
+        "height": 4096,
+        "alt": "",
+        "rel": [
+          "full",
+          "primary_logo_on_primary_color"
+        ],
+        "lastUpdated": "2024-12-03T20:47Z"
+      },
+      {
+        "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/primary_logo_on_secondary_color.png",
+        "width": 4096,
+        "height": 4096,
+        "alt": "",
+        "rel": [
+          "full",
+          "primary_logo_on_secondary_color"
+        ],
+        "lastUpdated": "2024-12-03T20:48Z"
+      },
+      {
+        "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/secondary_logo_on_white_color.png",
+        "width": 4096,
+        "height": 4096,
+        "alt": "",
+        "rel": [
+          "full",
+          "secondary_logo_on_white_color"
+        ],
+        "lastUpdated": "2024-12-03T20:48Z"
+      },
+      {
+        "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/secondary_logo_on_black_color.png",
+        "width": 4096,
+        "height": 4096,
+        "alt": "",
+        "rel": [
+          "full",
+          "secondary_logo_on_black_color"
+        ],
+        "lastUpdated": "2024-12-03T20:48Z"
+      },
+      {
+        "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/secondary_logo_on_primary_color.png",
+        "width": 4096,
+        "height": 4096,
+        "alt": "",
+        "rel": [
+          "full",
+          "secondary_logo_on_primary_color"
+        ],
+        "lastUpdated": "2024-12-03T20:48Z"
+      },
+      {
+        "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/secondary_logo_on_secondary_color.png",
+        "width": 4096,
+        "height": 4096,
+        "alt": "",
+        "rel": [
+          "full",
+          "secondary_logo_on_secondary_color"
+        ],
+        "lastUpdated": "2024-12-03T20:48Z"
+      }
+    ],
+    "record": {
+      "items": [
+        {
+          "type": "total",
+          "summary": "5-2",
+          "stats": [
+            {
+              "name": "OTLosses",
+              "value": 0.0
+            },
+            {
+              "name": "OTWins",
+              "value": 0.0
+            },
+            {
+              "name": "avgPointsAgainst",
+              "value": 23.571428
+            },
+            {
+              "name": "avgPointsFor",
+              "value": 24.285715
+            },
+            {
+              "name": "differential",
+              "value": 5.0
+            },
+            {
+              "name": "divisionWinPercent",
+              "value": 0.5
+            },
+            {
+              "name": "gamesBehind",
+              "value": 0.0
+            },
+            {
+              "name": "gamesPlayed",
+              "value": 7.0
+            },
+            {
+              "name": "leagueWinPercent",
+              "value": 0.8
+            },
+            {
+              "name": "losses",
+              "value": 2.0
+            },
+            {
+              "name": "playoffSeed",
+              "value": 3.0
+            },
+            {
+              "name": "pointDifferential",
+              "value": 5.0
+            },
+            {
+              "name": "points",
+              "value": 1.5
+            },
+            {
+              "name": "pointsAgainst",
+              "value": 165.0
+            },
+            {
+              "name": "pointsFor",
+              "value": 170.0
+            },
+            {
+              "name": "streak",
+              "value": 1.0
+            },
+            {
+              "name": "ties",
+              "value": 0.0
+            },
+            {
+              "name": "winPercent",
+              "value": 0.71428573
+            },
+            {
+              "name": "wins",
+              "value": 5.0
+            },
+            {
+              "name": "divisionLosses",
+              "value": 1.0
+            },
+            {
+              "name": "divisionRecord",
+              "value": 0.0
+            },
+            {
+              "name": "divisionTies",
+              "value": 0.0
+            },
+            {
+              "name": "divisionWins",
+              "value": 1.0
+            }
+          ]
+        },
+        {
+          "description": "Home Record",
+          "type": "home",
+          "summary": "2-1",
+          "stats": [
+            {
+              "name": "wins",
+              "value": 2.0
+            },
+            {
+              "name": "losses",
+              "value": 1.0
+            },
+            {
+              "name": "ties",
+              "value": 0.0
+            },
+            {
+              "name": "winPercent",
+              "value": 0.6666666865348816
+            },
+            {
+              "name": "OTLosses",
+              "value": 0.0
+            }
+          ]
+        },
+        {
+          "description": "Away Record",
+          "type": "road",
+          "summary": "3-1",
+          "stats": [
+            {
+              "name": "wins",
+              "value": 3.0
+            },
+            {
+              "name": "losses",
+              "value": 1.0
+            },
+            {
+              "name": "ties",
+              "value": 0.0
+            },
+            {
+              "name": "winPercent",
+              "value": 0.75
+            },
+            {
+              "name": "OTLosses",
+              "value": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    "groups": {
+      "id": "1",
+      "parent": {
+        "id": "7"
+      },
+      "isConference": false
+    },
+    "links": [
+      {
+        "language": "en-US",
+        "rel": [
+          "clubhouse",
+          "desktop",
+          "team"
+        ],
+        "href": "https://www.espn.com/nfl/team/_/name/phi/philadelphia-eagles",
+        "text": "Clubhouse",
+        "shortText": "Clubhouse",
+        "isExternal": false,
+        "isPremium": false
+      },
+      {
+        "language": "en-US",
+        "rel": [
+          "roster",
+          "desktop",
+          "team"
+        ],
+        "href": "https://www.espn.com/nfl/team/roster/_/name/phi/philadelphia-eagles",
+        "text": "Roster",
+        "shortText": "Roster",
+        "isExternal": false,
+        "isPremium": false
+      },
+      {
+        "language": "en-US",
+        "rel": [
+          "stats",
+          "desktop",
+          "team"
+        ],
+        "href": "https://www.espn.com/nfl/team/stats/_/name/phi/philadelphia-eagles",
+        "text": "Statistics",
+        "shortText": "Statistics",
+        "isExternal": false,
+        "isPremium": false
+      },
+      {
+        "language": "en-US",
+        "rel": [
+          "schedule",
+          "desktop",
+          "team"
+        ],
+        "href": "https://www.espn.com/nfl/team/schedule/_/name/phi",
+        "text": "Schedule",
+        "shortText": "Schedule",
+        "isExternal": false,
+        "isPremium": false
+      },
+      {
+        "language": "en-US",
+        "rel": [
+          "photos",
+          "desktop",
+          "team"
+        ],
+        "href": "https://www.espn.com/nfl/team/photos/_/name/phi",
+        "text": "photos",
+        "shortText": "photos",
+        "isExternal": false,
+        "isPremium": false
+      },
+      {
+        "language": "en-US",
+        "rel": [
+          "tickets",
+          "desktop",
+          "team"
+        ],
+        "href": "https://www.vividseats.com/philadelphia-eagles-tickets--sports-nfl-football/performer/669?wsUser=717",
+        "text": "Tickets",
+        "shortText": "Tickets",
+        "isExternal": true,
+        "isPremium": false
+      },
+      {
+        "language": "en-US",
+        "rel": [
+          "draftpicks",
+          "desktop",
+          "team"
+        ],
+        "href": "https://www.espn.com/nfl/draft/teams/_/name/phi/philadelphia-eagles",
+        "text": "Draft Picks",
+        "shortText": "Draft Picks",
+        "isExternal": false,
+        "isPremium": true
+      },
+      {
+        "language": "en-US",
+        "rel": [
+          "transactions",
+          "desktop",
+          "team"
+        ],
+        "href": "https://www.espn.com/nfl/team/transactions/_/name/phi",
+        "text": "Transactions",
+        "shortText": "Transactions",
+        "isExternal": false,
+        "isPremium": false
+      },
+      {
+        "language": "en-US",
+        "rel": [
+          "injuries",
+          "desktop",
+          "team"
+        ],
+        "href": "https://www.espn.com/nfl/team/injuries/_/name/phi",
+        "text": "Injuries",
+        "shortText": "Injuries",
+        "isExternal": false,
+        "isPremium": false
+      },
+      {
+        "language": "en-US",
+        "rel": [
+          "depthchart",
+          "desktop",
+          "team"
+        ],
+        "href": "https://www.espn.com/nfl/team/depth/_/name/phi",
+        "text": "Depth Chart",
+        "shortText": "Depth Chart",
+        "isExternal": false,
+        "isPremium": false
+      }
+    ],
+    "franchise": {
+      "$ref": "http://sports.core.api.espn.pvt/v2/sports/football/leagues/nfl/franchises/21?lang=en&region=us",
+      "id": "21",
+      "uid": "s:20~l:28~f:21",
+      "slug": "philadelphia-eagles",
+      "location": "Philadelphia",
+      "name": "Eagles",
+      "nickname": "Eagles",
+      "abbreviation": "PHI",
+      "displayName": "Philadelphia Eagles",
+      "shortDisplayName": "Eagles",
+      "color": "06424d",
+      "isActive": true,
+      "venue": {
+        "$ref": "http://sports.core.api.espn.pvt/v2/sports/football/leagues/nfl/venues/3806?lang=en&region=us",
+        "id": "3806",
+        "guid": "a1e68291-b8a7-3428-9754-7bfc568e5d71",
+        "fullName": "Lincoln Financial Field",
+        "address": {
+          "city": "Philadelphia",
+          "state": "PA",
+          "zipCode": "19148",
+          "country": "USA"
+        },
+        "grass": true,
+        "indoor": false,
+        "images": [
+          {
+            "href": "https://a.espncdn.com/i/venues/nfl/day/3806.jpg",
+            "width": 2000,
+            "height": 1125,
+            "alt": "",
+            "rel": [
+              "full",
+              "day"
+            ]
+          },
+          {
+            "href": "https://a.espncdn.com/i/venues/nfl/day/interior/3806.jpg",
+            "width": 2000,
+            "height": 1125,
+            "alt": "",
+            "rel": [
+              "full",
+              "day",
+              "interior"
+            ]
+          }
+        ]
+      },
+      "team": {
+        "$ref": "http://sports.core.api.espn.pvt/v2/sports/football/leagues/nfl/seasons/2025/teams/21?lang=en&region=us"
+      }
+    },
+    "nextEvent": [
+      {
+        "id": "401772867",
+        "date": "2025-10-26T17:00Z",
+        "name": "New York Giants at Philadelphia Eagles",
+        "shortName": "NYG @ PHI",
+        "season": {
+          "year": 2025,
+          "displayName": "2025"
+        },
+        "seasonType": {
+          "id": "2",
+          "type": 2,
+          "name": "Regular Season",
+          "abbreviation": "reg"
+        },
+        "week": {
+          "number": 8,
+          "text": "Week 8"
+        },
+        "timeValid": true,
+        "competitions": [
+          {
+            "id": "401772867",
+            "date": "2025-10-26T17:00Z",
+            "attendance": 0,
+            "type": {
+              "id": "1",
+              "text": "Standard",
+              "abbreviation": "STD",
+              "slug": "standard",
+              "type": "standard"
+            },
+            "timeValid": true,
+            "neutralSite": false,
+            "boxscoreAvailable": false,
+            "ticketsAvailable": true,
+            "venue": {
+              "fullName": "Lincoln Financial Field",
+              "address": {
+                "city": "Philadelphia",
+                "state": "PA",
+                "zipCode": "19148",
+                "country": "USA"
+              }
+            },
+            "competitors": [
+              {
+                "id": "21",
+                "type": "team",
+                "order": 0,
+                "homeAway": "home",
+                "team": {
+                  "id": "21",
+                  "location": "Philadelphia",
+                  "nickname": "Eagles",
+                  "abbreviation": "PHI",
+                  "displayName": "Philadelphia Eagles",
+                  "shortDisplayName": "Eagles",
+                  "logos": [
+                    {
+                      "href": "https://a.espncdn.com/i/teamlogos/nfl/500/phi.png",
+                      "width": 500,
+                      "height": 500,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "default"
+                      ],
+                      "lastUpdated": "2024-06-25T18:55Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/phi.png",
+                      "width": 500,
+                      "height": 500,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "dark"
+                      ],
+                      "lastUpdated": "2024-06-25T18:56Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/phi.png",
+                      "width": 500,
+                      "height": 500,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "scoreboard"
+                      ],
+                      "lastUpdated": "2024-06-25T18:56Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/scoreboard/phi.png",
+                      "width": 500,
+                      "height": 500,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "scoreboard",
+                        "dark"
+                      ],
+                      "lastUpdated": "2024-06-25T18:56Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/primary_logo_on_white_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "primary_logo_on_white_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:48Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/primary_logo_on_black_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "primary_logo_on_black_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:48Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/primary_logo_on_primary_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "primary_logo_on_primary_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:47Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/primary_logo_on_secondary_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "primary_logo_on_secondary_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:48Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/secondary_logo_on_white_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "secondary_logo_on_white_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:48Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/secondary_logo_on_black_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "secondary_logo_on_black_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:48Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/secondary_logo_on_primary_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "secondary_logo_on_primary_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:48Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/d1a9b001-1df7-fbd7-ae4c-6ca7065286ec/logos/secondary_logo_on_secondary_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "secondary_logo_on_secondary_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:48Z"
+                    }
+                  ],
+                  "links": [
+                    {
+                      "rel": [
+                        "clubhouse",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/_/name/phi/philadelphia-eagles",
+                      "text": "Clubhouse"
+                    },
+                    {
+                      "rel": [
+                        "roster",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/roster/_/name/phi/philadelphia-eagles",
+                      "text": "Roster"
+                    },
+                    {
+                      "rel": [
+                        "stats",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/stats/_/name/phi/philadelphia-eagles",
+                      "text": "Statistics"
+                    },
+                    {
+                      "rel": [
+                        "schedule",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/schedule/_/name/phi",
+                      "text": "Schedule"
+                    },
+                    {
+                      "rel": [
+                        "photos",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/photos/_/name/phi",
+                      "text": "photos"
+                    },
+                    {
+                      "rel": [
+                        "tickets",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.vividseats.com/philadelphia-eagles-tickets--sports-nfl-football/performer/669?wsUser=717",
+                      "text": "Tickets"
+                    },
+                    {
+                      "rel": [
+                        "draftpicks",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/draft/teams/_/name/phi/philadelphia-eagles",
+                      "text": "Draft Picks"
+                    },
+                    {
+                      "rel": [
+                        "transactions",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/transactions/_/name/phi",
+                      "text": "Transactions"
+                    },
+                    {
+                      "rel": [
+                        "injuries",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/injuries/_/name/phi",
+                      "text": "Injuries"
+                    },
+                    {
+                      "rel": [
+                        "depthchart",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/depth/_/name/phi",
+                      "text": "Depth Chart"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "19",
+                "type": "team",
+                "order": 1,
+                "homeAway": "away",
+                "team": {
+                  "id": "19",
+                  "location": "New York",
+                  "nickname": "Giants",
+                  "abbreviation": "NYG",
+                  "displayName": "New York Giants",
+                  "shortDisplayName": "Giants",
+                  "logos": [
+                    {
+                      "href": "https://a.espncdn.com/i/teamlogos/nfl/500/nyg.png",
+                      "width": 500,
+                      "height": 500,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "default"
+                      ],
+                      "lastUpdated": "2024-06-25T18:55Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/nyg.png",
+                      "width": 500,
+                      "height": 500,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "dark"
+                      ],
+                      "lastUpdated": "2024-06-25T18:59Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/nyg.png",
+                      "width": 500,
+                      "height": 500,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "scoreboard"
+                      ],
+                      "lastUpdated": "2024-06-25T18:55Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/scoreboard/nyg.png",
+                      "width": 500,
+                      "height": 500,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "scoreboard",
+                        "dark"
+                      ],
+                      "lastUpdated": "2024-06-25T18:59Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/378600ea-2397-8364-8399-b7c1606a49a7/logos/primary_logo_on_white_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "primary_logo_on_white_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:49Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/378600ea-2397-8364-8399-b7c1606a49a7/logos/primary_logo_on_black_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "primary_logo_on_black_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:49Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/378600ea-2397-8364-8399-b7c1606a49a7/logos/primary_logo_on_primary_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "primary_logo_on_primary_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:49Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/378600ea-2397-8364-8399-b7c1606a49a7/logos/primary_logo_on_secondary_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "primary_logo_on_secondary_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:49Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/378600ea-2397-8364-8399-b7c1606a49a7/logos/secondary_logo_on_white_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "secondary_logo_on_white_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:49Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/378600ea-2397-8364-8399-b7c1606a49a7/logos/secondary_logo_on_black_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "secondary_logo_on_black_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:49Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/378600ea-2397-8364-8399-b7c1606a49a7/logos/secondary_logo_on_primary_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "secondary_logo_on_primary_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:49Z"
+                    },
+                    {
+                      "href": "https://a.espncdn.com/guid/378600ea-2397-8364-8399-b7c1606a49a7/logos/secondary_logo_on_secondary_color.png",
+                      "width": 4096,
+                      "height": 4096,
+                      "alt": "",
+                      "rel": [
+                        "full",
+                        "secondary_logo_on_secondary_color"
+                      ],
+                      "lastUpdated": "2024-12-03T20:49Z"
+                    }
+                  ],
+                  "links": [
+                    {
+                      "rel": [
+                        "clubhouse",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/_/name/nyg/new-york-giants",
+                      "text": "Clubhouse"
+                    },
+                    {
+                      "rel": [
+                        "roster",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/roster/_/name/nyg/new-york-giants",
+                      "text": "Roster"
+                    },
+                    {
+                      "rel": [
+                        "stats",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/stats/_/name/nyg/new-york-giants",
+                      "text": "Statistics"
+                    },
+                    {
+                      "rel": [
+                        "schedule",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/schedule/_/name/nyg",
+                      "text": "Schedule"
+                    },
+                    {
+                      "rel": [
+                        "photos",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/photos/_/name/nyg",
+                      "text": "photos"
+                    },
+                    {
+                      "rel": [
+                        "tickets",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.vividseats.com/new-york-giants-tickets--sports-nfl-football/performer/599?wsUser=717",
+                      "text": "Tickets"
+                    },
+                    {
+                      "rel": [
+                        "draftpicks",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/draft/teams/_/name/nyg/new-york-giants",
+                      "text": "Draft Picks"
+                    },
+                    {
+                      "rel": [
+                        "transactions",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/transactions/_/name/nyg",
+                      "text": "Transactions"
+                    },
+                    {
+                      "rel": [
+                        "injuries",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/injuries/_/name/nyg",
+                      "text": "Injuries"
+                    },
+                    {
+                      "rel": [
+                        "depthchart",
+                        "desktop",
+                        "team"
+                      ],
+                      "href": "https://www.espn.com/nfl/team/depth/_/name/nyg",
+                      "text": "Depth Chart"
+                    }
+                  ]
+                }
+              }
+            ],
+            "notes": [],
+            "broadcasts": [
+              {
+                "type": {
+                  "id": "1",
+                  "shortName": "TV"
+                },
+                "market": {
+                  "id": "1",
+                  "type": "National"
+                },
+                "media": {
+                  "shortName": "FOX"
+                },
+                "lang": "en",
+                "region": "us",
+                "partnered": false
+              }
+            ],
+            "tickets": [
+              {
+                "id": "5470695",
+                "summary": "Tickets as low as $273",
+                "description": "New York Giants at Philadelphia Eagles",
+                "maxPrice": 5494.31,
+                "startingPrice": 273.09,
+                "numberAvailable": 156,
+                "totalPostings": 58,
+                "links": [
+                  {
+                    "rel": [
+                      "tickets",
+                      "desktop",
+                      "event"
+                    ],
+                    "href": "https://www.vividseats.com/philadelphia-eagles-tickets-lincoln-financial-field-3-1-2026--sports-nfl-football/production/5470695?wsUser=717"
+                  },
+                  {
+                    "rel": [
+                      "tickets",
+                      "desktop",
+                      "venue"
+                    ],
+                    "href": "https://www.vividseats.com/lincoln-financial-field-tickets/venue/2766?wsUser=717"
+                  }
+                ]
+              }
+            ],
+            "status": {
+              "clock": 0.0,
+              "displayClock": "0:00",
+              "period": 0,
+              "type": {
+                "id": "1",
+                "name": "STATUS_SCHEDULED",
+                "state": "pre",
+                "completed": false,
+                "description": "Scheduled",
+                "detail": "Sun, October 26th at 1:00 PM EDT",
+                "shortDetail": "10/26 - 1:00 PM EDT"
+              },
+              "isTBDFlex": false
+            }
+          }
+        ],
+        "links": [
+          {
+            "language": "en-US",
+            "rel": [
+              "summary",
+              "desktop",
+              "event"
+            ],
+            "href": "https://www.espn.com/nfl/game/_/gameId/401772867/giants-eagles",
+            "text": "Gamecast",
+            "shortText": "Summary",
+            "isExternal": false,
+            "isPremium": false
+          },
+          {
+            "language": "en-US",
+            "rel": [
+              "summary",
+              "sportscenter",
+              "app",
+              "event"
+            ],
+            "href": "sportscenter://x-callback-url/showGame?sportName=football&leagueAbbrev=nfl&gameId=401772867",
+            "text": "Gamecast",
+            "shortText": "Summary",
+            "isExternal": false,
+            "isPremium": false
+          },
+          {
+            "language": "en-US",
+            "rel": [
+              "now",
+              "desktop",
+              "event"
+            ],
+            "href": "https://www.espn.com/nfl/game/_/gameId/401772867",
+            "text": "Now",
+            "shortText": "Now",
+            "isExternal": false,
+            "isPremium": false
+          },
+          {
+            "language": "en-US",
+            "rel": [
+              "preview",
+              "desktop",
+              "event"
+            ],
+            "href": "https://www.espn.com/nfl/preview/_/gameId/401772867",
+            "text": "Preview",
+            "shortText": "Preview",
+            "isExternal": false,
+            "isPremium": false
+          },
+          {
+            "language": "en-US",
+            "rel": [
+              "odds",
+              "desktop",
+              "event"
+            ],
+            "href": "https://www.espn.com/nfl/odds/_/gameId/401772867",
+            "text": "Odds",
+            "shortText": "Odds",
+            "isExternal": false,
+            "isPremium": false
+          },
+          {
+            "language": "en-US",
+            "rel": [
+              "odds",
+              "mobile",
+              "event"
+            ],
+            "href": "https://m.espn.com/nfl/odds/_/gameId/401772867",
+            "text": "Odds",
+            "shortText": "Odds",
+            "isExternal": false,
+            "isPremium": false
+          }
+        ]
+      }
+    ],
+    "standingSummary": "1st in NFC East"
+  }
+}

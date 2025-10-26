@@ -1,0 +1,51 @@
+# Development Override
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+version: '3.8'
+
+services:
+  api:
+    build:
+      target: development
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+      - ./scripts:/app/scripts
+    environment:
+      DEBUG: "true"
+      LOG_LEVEL: DEBUG
+      RELOAD: "true"
+    ports:
+      - "8002:8000"  # API
+      - "5678:5678"  # Debugger port
+
+  worker:
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+      - ./scripts:/app/scripts
+    environment:
+      DEBUG: "true"
+      LOG_LEVEL: DEBUG
+
+  # PGAdmin for database management (dev only)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: nfl-ai-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@nfl-ai.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5434:80"  # Unique port for pgAdmin
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - nfl-ai-network
+
+volumes:
+  pgadmin_data:
+    driver: local

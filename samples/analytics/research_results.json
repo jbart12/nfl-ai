@@ -1,0 +1,63 @@
+{
+  "timestamp": "2025-10-26T12:17:39.528121",
+  "sources_tested": [
+    {
+      "source": "Pro Football Reference",
+      "tier": 2,
+      "status": "scrape_only",
+      "access_method": "HTML scraping",
+      "note": "No public API - must scrape HTML tables"
+    },
+    {
+      "source": "Football Outsiders",
+      "tier": 2,
+      "status": "failed",
+      "error": "Cannot connect to host www.footballoutsiders.com:443 ssl:default [nodename nor servname provided, or not known]"
+    },
+    {
+      "source": "FantasyPros",
+      "tier": 2,
+      "status": "requires_auth",
+      "note": "Requires API key"
+    },
+    {
+      "source": "RotoWire",
+      "tier": 2,
+      "status": "success",
+      "access_method": "RSS feed"
+    },
+    {
+      "source": "Action Network",
+      "tier": 3,
+      "status": "failed"
+    },
+    {
+      "source": "FiveThirtyEight",
+      "tier": 3,
+      "status": "success",
+      "access_method": "CSV file"
+    },
+    {
+      "source": "TeamRankings",
+      "tier": 3,
+      "status": "scrape_only",
+      "access_method": "HTML scraping"
+    }
+  ],
+  "successful": [
+    "RotoWire",
+    "FiveThirtyEight"
+  ],
+  "failed": [
+    "Football Outsiders",
+    "Action Network"
+  ],
+  "scrape_only": [
+    "Pro Football Reference",
+    "TeamRankings"
+  ],
+  "requires_auth": [
+    "FantasyPros"
+  ],
+  "findings": {}
+}

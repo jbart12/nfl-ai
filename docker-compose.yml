@@ -1,0 +1,185 @@
+# NFL AI - Complete Docker Compose Setup
+# Start entire project: docker-compose up -d
+# Stop: docker-compose down
+# View logs: docker-compose logs -f [service]
+
+version: '3.8'
+
+services:
+  # PostgreSQL Database (Structured Data)
+  postgres:
+    image: postgres:16-alpine
+    container_name: nfl-ai-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-nfl_ai_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nfl_ai_password}
+      POSTGRES_DB: ${POSTGRES_DB:-nfl_ai}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5433:5432"  # Unique port (5433 instead of default 5432)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/migrations  # For SQL migrations
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nfl_ai_user -d nfl_ai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nfl-ai-network
+
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: nfl-ai-qdrant
+    restart: unless-stopped
+    ports:
+      - "6334:6333"  # Unique port (6334 instead of default 6333)
+      - "6335:6334"  # gRPC port
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__GRPC_PORT=6334
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:6333/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nfl-ai-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: nfl-ai-redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"  # Unique port (6380 instead of default 6379)
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nfl-ai-network
+
+  # FastAPI Application
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    container_name: nfl-ai-api
+    restart: unless-stopped
+    ports:
+      - "8002:8000"  # Unique port (8002 instead of 8001)
+    environment:
+      # Database
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432  # Internal port within Docker network
+      POSTGRES_USER: ${POSTGRES_USER:-nfl_ai_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nfl_ai_password}
+      POSTGRES_DB: ${POSTGRES_DB:-nfl_ai}
+
+      # Vector DB
+      QDRANT_HOST: qdrant
+      QDRANT_PORT: 6333  # Internal port
+
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379  # Internal port
+
+      # APIs
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      ODDS_API_KEY: ${ODDS_API_KEY:-}
+      TWITTER_API_KEY: ${TWITTER_API_KEY:-}
+      WEATHER_API_KEY: ${WEATHER_API_KEY:-}
+
+      # App Config
+      APP_ENV: ${APP_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      DEBUG: ${DEBUG:-true}
+    volumes:
+      - ./src:/app/src  # Mount source for hot reload
+      - ./docs:/app/docs
+      - ./samples:/app/samples
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - nfl-ai-network
+    command: uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Background Worker (Data Collection)
+  worker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.worker
+    container_name: nfl-ai-worker
+    restart: unless-stopped
+    environment:
+      # Database
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-nfl_ai_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nfl_ai_password}
+      POSTGRES_DB: ${POSTGRES_DB:-nfl_ai}
+
+      # Vector DB
+      QDRANT_HOST: qdrant
+      QDRANT_PORT: 6333
+
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+      # APIs
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      ODDS_API_KEY: ${ODDS_API_KEY:-}
+      TWITTER_API_KEY: ${TWITTER_API_KEY:-}
+      WEATHER_API_KEY: ${WEATHER_API_KEY:-}
+
+      # Worker Config
+      APP_ENV: ${APP_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-4}
+    volumes:
+      - ./src:/app/src
+      - ./scripts:/app/scripts
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - nfl-ai-network
+    command: python -m src.services.orchestration.scheduler
+
+networks:
+  nfl-ai-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  qdrant_storage:
+    driver: local
+  redis_data:
+    driver: local

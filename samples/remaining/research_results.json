@@ -1,0 +1,107 @@
+{
+  "timestamp": "2025-10-26T12:18:37.473923",
+  "sources_tested": [
+    {
+      "source": "Sharp Football Stats",
+      "tier": 2,
+      "url": "https://www.sharpfootballstats.com/",
+      "test_type": "html",
+      "status": "scrape_only",
+      "status_code": 200,
+      "access_method": "HTML scraping"
+    },
+    {
+      "source": "FantasyData",
+      "tier": 2,
+      "url": "https://api.sportsdata.io/v3/nfl/stats/json/Players",
+      "test_type": "api",
+      "status": "requires_auth",
+      "status_code": 401,
+      "note": "Authentication required"
+    },
+    {
+      "source": "Pro Football Focus",
+      "tier": 2,
+      "url": "https://www.pff.com/nfl/grades",
+      "test_type": "html",
+      "status": "failed",
+      "status_code": 404
+    },
+    {
+      "source": "Vegas Insider",
+      "tier": 3,
+      "url": "https://www.vegasinsider.com/nfl/odds/",
+      "test_type": "html",
+      "status": "failed",
+      "status_code": 404
+    },
+    {
+      "source": "NumberFire",
+      "tier": 3,
+      "url": "https://www.numberfire.com/nfl/players/stats",
+      "test_type": "html",
+      "status": "failed",
+      "status_code": 500
+    },
+    {
+      "source": "PlayerProfiler",
+      "tier": 3,
+      "url": "https://www.playerprofiler.com/nfl/",
+      "test_type": "html",
+      "status": "scrape_only",
+      "status_code": 200,
+      "access_method": "HTML scraping"
+    },
+    {
+      "source": "4for4",
+      "tier": 3,
+      "url": "https://www.4for4.com/fantasy-football/rankings",
+      "test_type": "html",
+      "status": "failed",
+      "status_code": 404
+    },
+    {
+      "source": "Stathead",
+      "tier": 3,
+      "url": "https://stathead.com/football/",
+      "test_type": "html",
+      "status": "scrape_only",
+      "status_code": 200,
+      "access_method": "HTML scraping"
+    },
+    {
+      "source": "DraftKings Sportsbook",
+      "tier": 3,
+      "url": "https://sportsbook.draftkings.com/leagues/football/nfl",
+      "test_type": "html",
+      "status": "scrape_only",
+      "status_code": 200,
+      "access_method": "HTML scraping"
+    },
+    {
+      "source": "Football Perspective",
+      "tier": 3,
+      "url": "https://www.footballperspective.com/",
+      "test_type": "html",
+      "status": "scrape_only",
+      "status_code": 200,
+      "access_method": "HTML scraping"
+    }
+  ],
+  "successful": [],
+  "failed": [
+    "FantasyData",
+    "Pro Football Focus",
+    "Vegas Insider",
+    "NumberFire",
+    "4for4"
+  ],
+  "scrape_only": [
+    "Sharp Football Stats",
+    "PlayerProfiler",
+    "Stathead",
+    "DraftKings Sportsbook",
+    "Football Perspective"
+  ],
+  "requires_paid": []
+}

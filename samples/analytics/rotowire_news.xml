@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>RotoWire.com Latest NFL News</title>
+    <copyright>Copyright (c) 2025 Roto Sports, Inc, All rights reserved.</copyright>
+    <description>Fantasy Sports from RotoWire.com</description>
+    <category>Fantasy Sports</category>
+    <language>en-us</language>
+    <ttl>10</ttl>
+    <image>
+      <title>RotoWire.com Fantasy Sports</title>
+      <width>120</width>
+      <height>30</height>
+      <link>https://www.rotowire.com</link>
+      <url>https://content.rotowire.com/images/logo_roto_small.gif</url>
+    </image>
+    <link>https://www.rotowire.com</link>
+    <item>
+        <guid>nfl613086</guid>
+        <title>Malik Nabers: Surgery set for upcoming week</title>
+        <link>https://www.rotowire.com//football/player/malik-nabers-17704</link>
+        <description>Nabers is scheduled to undergo surgery later this upcoming week to repair the torn ACL and meniscus in his right knee, Ian Rapoport of NFL Network reports.
+
+        Visit RotoWire.com for more analysis on this update.</description>
+        <pubDate>Sun, 26 Oct 2025 9:26:00 AM PDT</pubDate>
+    </item>
+    <item>
+        <guid>nfl613076</guid>
+        <title>Jayden Daniels: Testing hamstring Sunday</title>
+        <link>https://www.rotowire.com//football/player/jayden-daniels-17692</link>
+        <description>Daniels will test his injured hamstring in workouts on Sunday, and the Commanders think he has a chance to return in Week 9 against the Seahawks, Jay Glazer reported on Fox NFL Sunday.
+
+        Visit RotoWire.com for more analysis on this update.</description>
+        <pubDate>Sun, 26 Oct 2025 9:14:00 AM PDT</pubDate>
+    </item>
+    <item>
+        <guid>nfl613058</guid>
+        <title>Kirk Cousins: Starting in place of Penix</title>
+        <link>https://www.rotowire.com//football/player/kirk-cousins-8057</link>
+        <description>Cousins will start Sunday's game against the Dolphins with Michael Penix (knee) inactive, Tori McElhaney of the Falcons' official site reports.
+
+        Visit RotoWire.com for more analysis on this update.</description>
+        <pubDate>Sun, 26 Oct 2025 8:49:00 AM PDT</pubDate>
+    </item>
+    <item>
+        <guid>nfl613054</guid>
+        <title>Bryce Young: Inactive Sunday</title>
+        <link>https://www.rotowire.com//football/player/bryce-young-16807</link>
+        <description>Young (ankle) is listed as inactive Sunday against the Bills, Darin Gantt of the Panthers' official site reports.
+
+        Visit RotoWire.com for more analysis on this update.</description>
+        <pubDate>Sun, 26 Oct 2025 8:46:00 AM PDT</pubDate>
+    </item>
+    <item>
+        <guid>nfl613048</guid>
+        <title>D'Andre Swift: Active in Week 8</title>
+        <link>https://www.rotowire.com//football/player/dandre-swift-14394</link>
+        <description>Swift (groin) is listed as active Sunday at Baltimore.
+
+        Visit RotoWire.com for more analysis on this update.</description>
+        <pubDate>Sun, 26 Oct 2025 8:42:00 AM PDT</pubDate>
+    </item>
+  </channel>
+</rss>

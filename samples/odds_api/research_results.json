@@ -1,0 +1,44 @@
+{
+  "timestamp": "2025-10-26T11:49:32.814235",
+  "endpoints_tested": [
+    {
+      "endpoint": "/sports",
+      "description": "List of all available sports",
+      "url": "https://api.the-odds-api.com/v4/sports",
+      "params": {},
+      "status": "failed",
+      "status_code": 401,
+      "error": "Invalid API key"
+    },
+    {
+      "endpoint": "/sports/americanfootball_nfl/odds",
+      "description": "NFL Game Odds (h2h, spreads, totals)",
+      "url": "https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds",
+      "params": {
+        "regions": "us",
+        "markets": "h2h,spreads,totals"
+      },
+      "status": "failed",
+      "status_code": 401,
+      "error": "Invalid API key"
+    },
+    {
+      "endpoint": "/sports/americanfootball_nfl/events",
+      "description": "NFL Events/Games List",
+      "url": "https://api.the-odds-api.com/v4/sports/americanfootball_nfl/events",
+      "params": {},
+      "status": "failed",
+      "status_code": 401,
+      "error": "Invalid API key"
+    }
+  ],
+  "successful": [],
+  "failed": [
+    "/sports",
+    "/sports/americanfootball_nfl/odds",
+    "/sports/americanfootball_nfl/events"
+  ],
+  "findings": {},
+  "api_usage": {},
+  "recommendation": "NO-GO"
+}

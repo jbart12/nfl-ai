@@ -1,0 +1,191 @@
+{
+  "timestamp": "2025-10-26T11:45:39.544850",
+  "endpoints_tested": [
+    {
+      "endpoint": "/state/nfl",
+      "description": "NFL State (Current Season, Week, etc.)",
+      "url": "https://api.sleeper.app/v1/state/nfl",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Date": "Sun, 26 Oct 2025 16:45:39 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Content-Encoding": "gzip",
+        "Etag": "W/\"b6d46da2378703b667f1a67edc010905\"",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Expose-Headers": "etag,date",
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=180",
+        "x-request-id": "800fa3615d7195f1d0a119ea6e9862e7",
+        "Strict-Transport-Security": "max-age=15724800; includeSubDomains",
+        "CF-Cache-Status": "HIT",
+        "Age": "24",
+        "Vary": "Accept-Encoding",
+        "Server": "cloudflare",
+        "CF-RAY": "994b6ce3aa261e95-ORD"
+      },
+      "response_size": 230,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/sleeper/nfl_state.json",
+      "analysis": {
+        "current_season": "2025",
+        "current_week": 8,
+        "season_type": "regular",
+        "top_level_keys": [
+          "week",
+          "leg",
+          "season",
+          "season_type",
+          "league_season",
+          "previous_season",
+          "season_start_date",
+          "display_week",
+          "league_create_season",
+          "season_has_scores"
+        ]
+      }
+    },
+    {
+      "endpoint": "/players/nfl",
+      "description": "All NFL Players (Full Database)",
+      "url": "https://api.sleeper.app/v1/players/nfl",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Date": "Sun, 26 Oct 2025 16:45:40 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Content-Encoding": "gzip",
+        "Etag": "W/\"ce0115457f8670c51685fbc8acf8996a\"",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Expose-Headers": "etag,date",
+        "Cache-Control": "public, s-maxage=600, stale-while-revalidate=300",
+        "x-request-id": "400c318d89cbc7d6f75b2cee443b95ea",
+        "Strict-Transport-Security": "max-age=15724800; includeSubDomains",
+        "CF-Cache-Status": "HIT",
+        "Age": "222",
+        "Vary": "Accept-Encoding",
+        "Server": "cloudflare",
+        "CF-RAY": "994b6cea3b931e95-ORD"
+      },
+      "response_size": 14565422,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/sleeper/players_all.json",
+      "analysis": {}
+    },
+    {
+      "endpoint": "/players/nfl/trending/add",
+      "description": "Trending Players (Adds)",
+      "url": "https://api.sleeper.app/v1/players/nfl/trending/add",
+      "status": "success",
+      "status_code": 200,
+      "headers": {
+        "Date": "Sun, 26 Oct 2025 16:45:42 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Content-Encoding": "gzip",
+        "Etag": "W/\"0b20ef1fd755713f37fa3369d64fe06d\"",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Expose-Headers": "etag,date",
+        "Cache-Control": "public, s-maxage=600, stale-while-revalidate=300",
+        "x-request-id": "395ca768c76123837f858d42354197d7",
+        "Strict-Transport-Security": "max-age=15724800; includeSubDomains",
+        "CF-Cache-Status": "HIT",
+        "Age": "586",
+        "Vary": "Accept-Encoding",
+        "Server": "cloudflare",
+        "CF-RAY": "994b6cf5f9fe1e95-ORD"
+      },
+      "response_size": 990,
+      "saved_to": "/Users/jace/dev/nfl-ai/samples/sleeper/trending_adds.json",
+      "analysis": {
+        "num_trending": 25,
+        "trending_keys": [
+          "count",
+          "player_id"
+        ]
+      }
+    },
+    {
+      "endpoint": "/stats/nfl/2024",
+      "description": "NFL Stats (2024 Season)",
+      "url": "https://api.sleeper.app/v1/stats/nfl/2024",
+      "status": "failed",
+      "status_code": 404,
+      "headers": {
+        "Date": "Sun, 26 Oct 2025 16:45:43 GMT",
+        "Content-Type": "text/html; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Content-Encoding": "gzip",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Expose-Headers": "etag,date",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "x-request-id": "d1eb7b671bbc8557e981ea00a5536d2e",
+        "Strict-Transport-Security": "max-age=15724800; includeSubDomains",
+        "CF-Cache-Status": "MISS",
+        "Vary": "Accept-Encoding",
+        "Server": "cloudflare",
+        "CF-RAY": "994b6cfc7d5d1e95-ORD"
+      },
+      "error": "HTTP 404"
+    },
+    {
+      "endpoint": "/projections/nfl/2024",
+      "description": "Player Projections (2024 Season)",
+      "url": "https://api.sleeper.app/v1/projections/nfl/2024",
+      "status": "failed",
+      "status_code": 404,
+      "headers": {
+        "Date": "Sun, 26 Oct 2025 16:45:44 GMT",
+        "Content-Type": "text/html; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Content-Encoding": "gzip",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Expose-Headers": "etag,date",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "x-request-id": "bff5dde05b80fc506d32aee5950d46f6",
+        "Strict-Transport-Security": "max-age=15724800; includeSubDomains",
+        "cf-cache-status": "MISS",
+        "Vary": "Accept-Encoding",
+        "Server": "cloudflare",
+        "CF-RAY": "994b6d0319fc1e95-ORD"
+      },
+      "error": "HTTP 404"
+    }
+  ],
+  "successful": [
+    "/state/nfl",
+    "/players/nfl",
+    "/players/nfl/trending/add"
+  ],
+  "failed": [
+    "/stats/nfl/2024",
+    "/projections/nfl/2024"
+  ],
+  "findings": {
+    "injury_data": {
+      "total_injured": 1098,
+      "status_breakdown": {
+        "Questionable": 518,
+        "IR": 268,
+        "Out": 176,
+        "NA": 83,
+        "PUP": 37,
+        "Sus": 12,
+        "COV": 2,
+        "Doubtful": 1,
+        "DNR": 1
+      },
+      "has_body_part": 1021
+    }
+  },
+  "recommendation": "GO"
+}

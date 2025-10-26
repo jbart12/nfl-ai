@@ -1,0 +1,88 @@
+{
+  "timestamp": "2025-10-26T12:02:52.306687",
+  "sources_tested": [
+    {
+      "source": "ESPN News API",
+      "status": "success",
+      "type": "JSON API",
+      "article_count": 6,
+      "sample_article": {
+        "headline": "Fantasy football Week 8 inactives: Lamar Jackson, Brock Purdy, Michael Penix Jr., Bryce Young all sitting",
+        "published": "2025-10-26T16:52:40Z",
+        "description": "Updated inactives and analysis based on the latest reports and official announcements leading up to "
+      },
+      "injury_article_count": 1
+    },
+    {
+      "source": "NFL.com RSS",
+      "status": "failed",
+      "type": "RSS Feed",
+      "error": "No feeds accessible"
+    },
+    {
+      "source": "Reddit /r/NFL RSS",
+      "status": "success",
+      "type": "RSS Feed",
+      "feeds": [
+        {
+          "sort": "new",
+          "url": "https://www.reddit.com/r/nfl/new/.rss",
+          "entry_count": 25
+        },
+        {
+          "sort": "hot",
+          "url": "https://www.reddit.com/r/nfl/.rss",
+          "entry_count": 27
+        }
+      ]
+    },
+    {
+      "source": "Sleeper Injury Updates",
+      "status": "success",
+      "type": "JSON API",
+      "total_injured": 1098,
+      "sample_injuries": [
+        {
+          "name": "C.J. Mosley",
+          "team": null,
+          "status": "Questionable",
+          "body_part": "Neck"
+        },
+        {
+          "name": "DeAndrew White",
+          "team": null,
+          "status": "Questionable",
+          "body_part": "Undisclosed"
+        },
+        {
+          "name": "Kevon Seymour",
+          "team": null,
+          "status": "Questionable",
+          "body_part": "Undisclosed"
+        },
+        {
+          "name": "Eric Murray",
+          "team": "JAX",
+          "status": "Questionable",
+          "body_part": "Neck"
+        },
+        {
+          "name": "Salvon Ahmed",
+          "team": "IND",
+          "status": "IR",
+          "body_part": "Ankle"
+        }
+      ]
+    }
+  ],
+  "successful": [
+    "ESPN News API",
+    "Reddit /r/NFL RSS",
+    "Sleeper Injury Updates"
+  ],
+  "failed": [
+    "NFL.com RSS"
+  ],
+  "findings": {},
+  "recommendation": "GO"
+}

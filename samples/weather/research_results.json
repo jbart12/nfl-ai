@@ -1,0 +1,37 @@
+{
+  "timestamp": "2025-10-26T11:59:42.119091",
+  "apis_tested": [
+    {
+      "api": "OpenWeatherMap",
+      "status": "skipped",
+      "tests": [],
+      "error": "No API key found (OPENWEATHER_API_KEY)"
+    },
+    {
+      "api": "WeatherAPI.com",
+      "status": "skipped",
+      "tests": [],
+      "error": "No API key found (WEATHERAPI_KEY)"
+    },
+    {
+      "api": "NOAA/NWS",
+      "status": "success",
+      "tests": [
+        {
+          "endpoint": "forecast",
+          "status": "success",
+          "periods": 14
+        }
+      ]
+    }
+  ],
+  "successful": [
+    "NOAA/NWS"
+  ],
+  "failed": [],
+  "findings": {},
+  "recommendation": "GO",
+  "recommended_apis": [
+    "NOAA/NWS"
+  ]
+}
