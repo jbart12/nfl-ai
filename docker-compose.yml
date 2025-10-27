@@ -17,7 +17,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-nfl_ai}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
-      - "5433:5432"  # Unique port (5433 instead of default 5432)
+      - "5434:5432"  # Unique port (5434 instead of default 5432)
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./migrations:/migrations  # For SQL migrations
@@ -35,17 +35,18 @@ services:
     container_name: nfl-ai-qdrant
     restart: unless-stopped
     ports:
-      - "6334:6333"  # Unique port (6334 instead of default 6333)
-      - "6335:6334"  # gRPC port
+      - "6336:6333"  # Unique port (6336 instead of default 6333)
+      - "6337:6334"  # gRPC port
     volumes:
       - qdrant_storage:/qdrant/storage
     environment:
       - QDRANT__SERVICE__GRPC_PORT=6334
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:6333/healthz"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    # healthcheck disabled - curl/wget not available in container
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
     networks:
       - nfl-ai-network
 
@@ -103,15 +104,16 @@ services:
       APP_ENV: ${APP_ENV:-development}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       DEBUG: ${DEBUG:-true}
+      PYTHONPATH: /app/backend
     volumes:
-      - ./src:/app/src  # Mount source for hot reload
+      - ./backend:/app/backend  # Mount source for hot reload
       - ./docs:/app/docs
       - ./samples:/app/samples
     depends_on:
       postgres:
         condition: service_healthy
       qdrant:
-        condition: service_healthy
+        condition: service_started
       redis:
         condition: service_healthy
     healthcheck:
@@ -122,7 +124,7 @@ services:
       start_period: 40s
     networks:
       - nfl-ai-network
-    command: uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
   # Background Worker (Data Collection)
   worker:
@@ -165,7 +167,7 @@ services:
       postgres:
         condition: service_healthy
       qdrant:
-        condition: service_healthy
+        condition: service_started
       redis:
         condition: service_healthy
     networks:

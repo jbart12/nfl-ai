@@ -93,27 +93,35 @@ async def predict_prop(
         matchup_context = await _get_matchup_context(db, player, opponent)
         injury_context = await _get_injury_context(db, player.id)
 
-        # RAG: Find similar historical situations
-        rag_service = get_rag_service()
-        context_description = _build_context_description(
-            current_stats=current_stats,
-            matchup_context=matchup_context,
-            injury_context=injury_context
-        )
+        # RAG: Find similar historical situations (optional - gracefully degrades if embeddings unavailable)
+        similar_situations = []
+        try:
+            rag_service = get_rag_service()
+            context_description = _build_context_description(
+                current_stats=current_stats,
+                matchup_context=matchup_context,
+                injury_context=injury_context
+            )
 
-        similar_situations = await rag_service.find_similar_performances(
-            db=db,
-            player_id=player.id,
-            stat_type=stat_type,
-            context_description=context_description,
-            limit=10
-        )
+            similar_situations = await rag_service.find_similar_performances(
+                db=db,
+                player_id=player.id,
+                stat_type=stat_type,
+                context_description=context_description,
+                limit=10
+            )
 
-        logger.info(
-            "similar_situations_found",
-            player=player.name,
-            count=len(similar_situations)
-        )
+            logger.info(
+                "similar_situations_found",
+                player=player.name,
+                count=len(similar_situations)
+            )
+        except Exception as e:
+            logger.warning(
+                "rag_unavailable_continuing_without",
+                player=player.name,
+                error=str(e)
+            )
 
         # Build prop context for Claude
         prop_context = {
