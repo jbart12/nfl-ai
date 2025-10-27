@@ -35,14 +35,11 @@ export interface Prediction {
 }
 
 export interface SimilarSituation {
-  id: string
   similarity_score: number
   player_name: string
-  game: string
+  game_info: string
   result: string
   narrative: string
-  outcome?: 'OVER' | 'UNDER'
-  line?: number
 }
 
 export interface Game {

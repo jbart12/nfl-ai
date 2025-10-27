@@ -39,10 +39,34 @@ class PredictionRequest(BaseModel):
     opponent: Optional[str] = None
 
 
+class CurrentStats(BaseModel):
+    """Current season statistics"""
+    games_played: int
+    avg_per_game: float
+    last_3_games: List[float]
+    min: float
+    max: float
+    std_dev: float
+
+
+class SimilarSituation(BaseModel):
+    """Similar historical situation"""
+    similarity_score: float
+    player_name: str
+    game_info: str
+    result: str
+    narrative: str
+
+
 class PredictionResponse(BaseModel):
     """Response with AI prediction"""
     prop_id: Optional[str]
     player_name: str
+    player_id: str
+    position: str
+    team: str
+    opponent: str
+    week: int
     stat_type: str
     line_score: float
     prediction: str  # "OVER" or "UNDER"
@@ -52,6 +76,8 @@ class PredictionResponse(BaseModel):
     key_factors: List[str]
     risk_factors: List[str]
     comparable_game: Optional[str]
+    current_stats: CurrentStats
+    similar_situations: List[SimilarSituation]
     similar_situations_count: int
     model: str
     generated_at: datetime
@@ -158,10 +184,37 @@ async def predict_prop(
             confidence=prediction_result["confidence"]
         )
 
+        # Format current stats for response
+        current_stats_response = CurrentStats(
+            games_played=current_stats.get("games_played", 0),
+            avg_per_game=current_stats.get("avg_per_game", 0.0),
+            last_3_games=current_stats.get("last_3_games", []),
+            min=current_stats.get("min", 0.0),
+            max=current_stats.get("max", 0.0),
+            std_dev=current_stats.get("std_dev", 0.0)
+        )
+
+        # Format similar situations for response
+        similar_situations_response = [
+            SimilarSituation(
+                similarity_score=sit.get("similarity_score", 0.0),
+                player_name=sit.get("player_name", "Unknown"),
+                game_info=sit.get("game_info", ""),
+                result=sit.get("result", ""),
+                narrative=sit.get("narrative", "")
+            )
+            for sit in similar_situations
+        ]
+
         # Format response
         response = PredictionResponse(
             prop_id=request.prop_id,
             player_name=player.name,
+            player_id=str(player.id),
+            position=player.player_position or "Unknown",
+            team=player.team_id or "Unknown",
+            opponent=opponent or "Unknown",
+            week=matchup_context.get("week", 0),
             stat_type=stat_type,
             line_score=line_score,
             prediction=prediction_result["prediction"],
@@ -171,6 +224,8 @@ async def predict_prop(
             key_factors=prediction_result.get("key_factors", []),
             risk_factors=prediction_result.get("risk_factors", []),
             comparable_game=prediction_result.get("comparable_game"),
+            current_stats=current_stats_response,
+            similar_situations=similar_situations_response,
             similar_situations_count=len(similar_situations),
             model=prediction_result["model"],
             generated_at=datetime.utcnow()
