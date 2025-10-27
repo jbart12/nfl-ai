@@ -12,9 +12,9 @@ services:
     container_name: nfl-ai-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-nfl_ai_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nfl_ai_password}
-      POSTGRES_DB: ${POSTGRES_DB:-nfl_ai}
+      POSTGRES_USER: ${POSTGRES_USER:-nfl_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nfl_password}
+      POSTGRES_DB: ${POSTGRES_DB:-nfl_analytics}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5434:5432"  # Unique port (5434 instead of default 5432)
@@ -22,7 +22,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./migrations:/migrations  # For SQL migrations
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U nfl_ai_user -d nfl_ai"]
+      test: ["CMD-SHELL", "pg_isready -U nfl_user -d nfl_analytics"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -76,14 +76,14 @@ services:
     container_name: nfl-ai-api
     restart: unless-stopped
     ports:
-      - "8002:8000"  # Unique port (8002 instead of 8001)
+      - "8000:8000"  # Expose on port 8000
     environment:
       # Database
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432  # Internal port within Docker network
-      POSTGRES_USER: ${POSTGRES_USER:-nfl_ai_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nfl_ai_password}
-      POSTGRES_DB: ${POSTGRES_DB:-nfl_ai}
+      POSTGRES_USER: ${POSTGRES_USER:-nfl_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nfl_password}
+      POSTGRES_DB: ${POSTGRES_DB:-nfl_analytics}
 
       # Vector DB
       QDRANT_HOST: qdrant
@@ -126,6 +126,28 @@ services:
       - nfl-ai-network
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
+  # Next.js Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev  # Use dev Dockerfile for hot reload
+    container_name: nfl-ai-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8000  # Internal Docker network URL
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app  # Mount source for hot reload
+      - /app/node_modules  # Prevent node_modules override
+      - /app/.next  # Prevent .next override
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - nfl-ai-network
+
   # Background Worker (Data Collection)
   worker:
     build:
@@ -137,9 +159,9 @@ services:
       # Database
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
-      POSTGRES_USER: ${POSTGRES_USER:-nfl_ai_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nfl_ai_password}
-      POSTGRES_DB: ${POSTGRES_DB:-nfl_ai}
+      POSTGRES_USER: ${POSTGRES_USER:-nfl_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nfl_password}
+      POSTGRES_DB: ${POSTGRES_DB:-nfl_analytics}
 
       # Vector DB
       QDRANT_HOST: qdrant
