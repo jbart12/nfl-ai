@@ -6,7 +6,7 @@ Orchestrates the full prediction flow: data gathering → RAG search → Claude 
 """
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, and_, func, desc
+from sqlalchemy import select, and_, or_, func, desc
 from typing import Dict, Any, Optional, List
 from datetime import datetime, date
 import structlog
@@ -21,6 +21,7 @@ from app.models.nfl import (
 )
 from app.services.claude_prediction import get_claude_service
 from app.services.rag_narrative import get_rag_service
+from app.services.sleeper_stats import get_sleeper_stats_service
 from pydantic import BaseModel
 
 logger = structlog.get_logger()
@@ -80,6 +81,14 @@ async def predict_prop(
         stat_type = prop_data["stat_type"]
         line_score = prop_data["line_score"]
         opponent = prop_data.get("opponent")
+
+        # CRITICAL: Validate opponent against schedule
+        validated_opponent_data = await _validate_and_get_opponent(db, player, opponent)
+        if "error" in validated_opponent_data:
+            raise HTTPException(status_code=400, detail=validated_opponent_data["error"])
+
+        opponent = validated_opponent_data["opponent"]
+        current_week = validated_opponent_data["week"]
 
         logger.info(
             "prediction_request",
@@ -429,6 +438,91 @@ def _build_context_description(
         parts.append(f"{injury_context['player_status']} injury status")
 
     return ", ".join(parts) if parts else "similar recent performances"
+
+
+async def _validate_and_get_opponent(
+    db: AsyncSession,
+    player: Player,
+    provided_opponent: Optional[str]
+) -> Dict[str, Any]:
+    """
+    CRITICAL: Validate opponent against schedule or auto-lookup from schedule.
+
+    This prevents the critical issue of making predictions against wrong opponents.
+
+    Returns:
+        {"opponent": str, "week": int} on success
+        {"error": str} on failure
+    """
+    try:
+        # Get current NFL state
+        sleeper_service = get_sleeper_stats_service()
+        nfl_state = await sleeper_service.get_nfl_state()
+        current_week = nfl_state.get("week")
+        current_season = nfl_state.get("season")
+
+        # Get player's team
+        player_team = player.team_id
+        if not player_team:
+            return {"error": f"Player {player.name} does not have a team assigned"}
+
+        # Look up game in schedule
+        query = select(Game).where(
+            and_(
+                Game.season == int(current_season),
+                Game.week == current_week,
+                or_(
+                    Game.home_team_id == player_team,
+                    Game.away_team_id == player_team
+                )
+            )
+        )
+
+        result = await db.execute(query)
+        game = result.scalar_one_or_none()
+
+        if not game:
+            return {
+                "error": f"No game scheduled for {player_team} in Week {current_week}. "
+                        f"Please run: python -m scripts.fetch_nfl_schedule"
+            }
+
+        # Check if game already started
+        if game.is_completed:
+            return {
+                "error": f"Game already completed (Week {current_week}: "
+                        f"{game.away_team_id} @ {game.home_team_id})"
+            }
+
+        # Determine actual opponent
+        actual_opponent = game.away_team_id if game.home_team_id == player_team else game.home_team_id
+
+        # If opponent was provided, validate it matches schedule
+        if provided_opponent:
+            if provided_opponent.upper() != actual_opponent.upper():
+                return {
+                    "error": f"Opponent mismatch for Week {current_week}. "
+                            f"{player.name}'s team ({player_team}) plays {actual_opponent}, not {provided_opponent}. "
+                            f"Game: {game.away_team_id} @ {game.home_team_id}"
+                }
+
+        logger.info(
+            "opponent_validated",
+            player=player.name,
+            team=player_team,
+            opponent=actual_opponent,
+            week=current_week,
+            provided=provided_opponent
+        )
+
+        return {
+            "opponent": actual_opponent,
+            "week": current_week
+        }
+
+    except Exception as e:
+        logger.error("opponent_validation_error", error=str(e), player=player.name)
+        return {"error": f"Failed to validate opponent: {str(e)}"}
 
 
 def _extract_stat_value(game_stat: PlayerGameStats, stat_type: str) -> Optional[float]:
