@@ -27,8 +27,18 @@ class VectorStoreService:
     """Service for vector storage and semantic search using Qdrant"""
 
     def __init__(self):
-        url = os.getenv("QDRANT_URL", "http://qdrant:6333")
-        self.client = QdrantClient(url=url)
+        # Support both QDRANT_URL and separate QDRANT_HOST/QDRANT_PORT
+        qdrant_url = os.getenv("QDRANT_URL")
+        if qdrant_url:
+            self.client = QdrantClient(url=qdrant_url)
+        else:
+            # Build URL from host and port (for local development)
+            qdrant_host = os.getenv("QDRANT_HOST", "localhost")
+            qdrant_port = os.getenv("QDRANT_PORT", "6333")
+            url = f"http://{qdrant_host}:{qdrant_port}"
+            self.client = QdrantClient(url=url)
+            logger.info("qdrant_client_initialized", url=url)
+
         self.collection_name = "game_performances"
         self.vector_size = 3072  # text-embedding-3-large dimensions
 
