@@ -165,7 +165,7 @@ class VectorStoreService:
         stat_type: Optional[str] = None,
         season: Optional[int] = None,
         limit: int = 10,
-        score_threshold: float = 0.7
+        score_threshold: float = 0.5
     ) -> List[Dict[str, Any]]:
         """
         Search for similar game performances using semantic search.

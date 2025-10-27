@@ -356,7 +356,7 @@ Similar to: {context_description}
                 player_id=player_id,
                 stat_type=stat_type,
                 limit=limit,
-                score_threshold=0.7
+                score_threshold=0.5
             )
 
             logger.info(
