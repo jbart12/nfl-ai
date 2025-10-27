@@ -5,7 +5,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 export async function fetchPrediction(
   request: PredictionRequest
 ): Promise<Prediction> {
-  const response = await fetch(`${API_URL}/api/predictions/predict`, {
+  const response = await fetch(`${API_URL}/api/v1/predictions/predict`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function fetchPrediction(
 }
 
 export async function fetchPlayer(playerId: string): Promise<Player> {
-  const response = await fetch(`${API_URL}/api/players/${playerId}`)
+  const response = await fetch(`${API_URL}/api/v1/players/${playerId}`)
 
   if (!response.ok) {
     throw new Error('Failed to fetch player')
@@ -32,7 +32,7 @@ export async function fetchPlayer(playerId: string): Promise<Player> {
 }
 
 export async function fetchCurrentSchedule(): Promise<Game[]> {
-  const response = await fetch(`${API_URL}/api/schedule/current`)
+  const response = await fetch(`${API_URL}/api/v1/schedule/current`)
 
   if (!response.ok) {
     throw new Error('Failed to fetch schedule')
