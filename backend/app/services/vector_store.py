@@ -5,6 +5,7 @@ Manages vector storage and semantic search for game performance narratives.
 Enables RAG (Retrieval-Augmented Generation) by finding similar historical situations.
 """
 import os
+import uuid
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 from qdrant_client import QdrantClient
@@ -93,8 +94,10 @@ class VectorStoreService:
             ID of the stored point
         """
         try:
-            # Generate unique ID for this performance
-            point_id = f"{player_id}_{season}_week{week}_{stat_type}"
+            # Generate unique UUID for this performance
+            # Use uuid5 for deterministic UUIDs based on player_id, season, week, stat_type
+            unique_string = f"{player_id}_{season}_week{week}_{stat_type}"
+            point_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, unique_string))
 
             # Build payload with all metadata
             payload = {
@@ -107,6 +110,7 @@ class VectorStoreService:
                 "season": season,
                 "opponent": opponent,
                 "narrative": narrative,
+                "unique_key": unique_string,  # Store for easy lookups
                 "created_at": datetime.utcnow().isoformat(),
             }
 
