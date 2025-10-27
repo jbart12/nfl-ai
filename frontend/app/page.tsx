@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8">
@@ -10,6 +12,12 @@ export default function Home() {
           <p className="text-xl text-muted-foreground mb-8">
             Data-driven player prop analysis backed by 3 seasons of historical context
           </p>
+          <Link
+            href="/predict"
+            className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+          >
+            Get Prediction →
+          </Link>
         </div>
 
         {/* Features Grid */}
@@ -47,64 +55,64 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Demo Section */}
+        {/* Example Section */}
         <div className="bg-muted/50 p-8 rounded-lg border">
-          <h3 className="text-2xl font-bold mb-4">Try a Prediction</h3>
-          <p className="text-muted-foreground mb-6">
-            The frontend is ready! Connect to the backend API to start generating predictions.
-          </p>
+          <h3 className="text-2xl font-bold mb-4">How It Works</h3>
+          <ol className="space-y-4">
+            <li className="flex gap-4">
+              <span className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">
+                1
+              </span>
+              <div>
+                <h4 className="font-semibold mb-1">Enter Player & Prop</h4>
+                <p className="text-sm text-muted-foreground">
+                  Search for any NFL player and select the prop you want to analyze
+                </p>
+              </div>
+            </li>
+            <li className="flex gap-4">
+              <span className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">
+                2
+              </span>
+              <div>
+                <h4 className="font-semibold mb-1">AI Analyzes Data</h4>
+                <p className="text-sm text-muted-foreground">
+                  Our system finds similar historical situations from 1,300+ games and analyzes current season trends
+                </p>
+              </div>
+            </li>
+            <li className="flex gap-4">
+              <span className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">
+                3
+              </span>
+              <div>
+                <h4 className="font-semibold mb-1">Get Prediction & Reasoning</h4>
+                <p className="text-sm text-muted-foreground">
+                  Receive OVER/UNDER prediction with confidence score, key factors, and full AI reasoning
+                </p>
+              </div>
+            </li>
+          </ol>
 
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Player</label>
-              <input
-                type="text"
-                placeholder="Patrick Mahomes"
-                className="w-full px-4 py-2 border rounded-lg"
-                disabled
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2">Stat Type</label>
-              <select className="w-full px-4 py-2 border rounded-lg" disabled>
-                <option>Passing Yards</option>
-                <option>Rushing Yards</option>
-                <option>Receiving Yards</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-2">Line</label>
-              <input
-                type="number"
-                placeholder="265.5"
-                className="w-full px-4 py-2 border rounded-lg"
-                disabled
-              />
-            </div>
-
-            <button
-              className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold opacity-50 cursor-not-allowed"
-              disabled
-            >
-              Get Prediction
-            </button>
-
-            <p className="text-sm text-muted-foreground text-center">
-              💡 Install dependencies and start the backend API to enable predictions
-            </p>
-          </div>
+          <Link
+            href="/predict"
+            className="mt-6 inline-block w-full text-center bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+          >
+            Try it Now →
+          </Link>
         </div>
 
         {/* Setup Instructions */}
         <div className="mt-12 p-6 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-200 dark:border-blue-800">
-          <h3 className="text-lg font-semibold mb-3">🚀 Quick Setup</h3>
+          <h3 className="text-lg font-semibold mb-3">🚀 Backend Setup Required</h3>
+          <p className="text-sm mb-3">
+            To use predictions, make sure the backend API is running:
+          </p>
           <ol className="space-y-2 text-sm">
-            <li>1. Install dependencies: <code className="bg-white dark:bg-gray-800 px-2 py-1 rounded">pnpm install</code></li>
-            <li>2. Copy <code className="bg-white dark:bg-gray-800 px-2 py-1 rounded">.env.example</code> to <code className="bg-white dark:bg-gray-800 px-2 py-1 rounded">.env.local</code></li>
-            <li>3. Start backend API (port 8000)</li>
-            <li>4. Run <code className="bg-white dark:bg-gray-800 px-2 py-1 rounded">pnpm dev</code></li>
+            <li>1. Start PostgreSQL and Qdrant (see docker-compose.yml)</li>
+            <li>2. Navigate to backend directory</li>
+            <li>3. Run: <code className="bg-white dark:bg-gray-800 px-2 py-1 rounded">uvicorn app.main:app --reload</code></li>
+            <li>4. API should be available at http://localhost:8000</li>
           </ol>
         </div>
       </div>
