@@ -102,18 +102,23 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Setup Instructions */}
-        <div className="mt-12 p-6 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-200 dark:border-blue-800">
-          <h3 className="text-lg font-semibold mb-3">🚀 Backend Setup Required</h3>
+        {/* Quick Start */}
+        <div className="mt-12 p-6 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
+          <h3 className="text-lg font-semibold mb-3">✅ Docker Setup Active</h3>
           <p className="text-sm mb-3">
-            To use predictions, make sure the backend API is running:
+            Everything is running via Docker Compose on unique ports:
           </p>
-          <ol className="space-y-2 text-sm">
-            <li>1. Start PostgreSQL and Qdrant (see docker-compose.yml)</li>
-            <li>2. Navigate to backend directory</li>
-            <li>3. Run: <code className="bg-white dark:bg-gray-800 px-2 py-1 rounded">uvicorn app.main:app --reload</code></li>
-            <li>4. API should be available at http://localhost:8000</li>
-          </ol>
+          <ul className="space-y-2 text-sm">
+            <li>• Frontend: <code className="bg-white dark:bg-gray-800 px-2 py-1 rounded">http://localhost:13000</code></li>
+            <li>• API: <code className="bg-white dark:bg-gray-800 px-2 py-1 rounded">http://localhost:18000</code></li>
+            <li>• PostgreSQL: Port 15432</li>
+            <li>• Qdrant: Port 16333</li>
+            <li>• Redis: Port 16379</li>
+          </ul>
+          <p className="text-xs mt-3 text-muted-foreground">
+            Start: <code className="bg-white dark:bg-gray-800 px-2 py-1 rounded">docker-compose up -d</code> •
+            Stop: <code className="bg-white dark:bg-gray-800 px-2 py-1 rounded ml-1">docker-compose down</code>
+          </p>
         </div>
       </div>
     </div>
