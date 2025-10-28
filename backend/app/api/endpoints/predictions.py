@@ -25,6 +25,7 @@ from app.models.nfl import (
 from app.services.claude_prediction import get_claude_service
 from app.services.rag_narrative import get_rag_service
 from app.services.sleeper_stats import get_sleeper_stats_service
+from app.services.batch_predictions import get_batch_prediction_service
 from pydantic import BaseModel
 
 logger = structlog.get_logger()
@@ -430,6 +431,43 @@ async def get_active_props(
     except Exception as e:
         logger.error("get_active_props_error", error=str(e))
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/generate-batch")
+async def generate_batch_predictions(
+    week: int = Query(..., description="Week number to generate predictions for"),
+    season: int = Query(2025, description="Season year"),
+    max_players: Optional[int] = Query(None, description="Limit number of players (for testing)"),
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Generate predictions for all notable props in the given week.
+
+    This endpoint triggers batch prediction generation for a full week.
+    Used by the scheduler or can be triggered manually.
+    """
+    try:
+        batch_service = get_batch_prediction_service()
+
+        logger.info("batch_generation_triggered", week=week, season=season)
+
+        result = await batch_service.generate_weekly_predictions(
+            db=db,
+            week=week,
+            season=season,
+            max_players=max_players
+        )
+
+        return {
+            "status": "success",
+            "week": week,
+            "season": season,
+            **result
+        }
+
+    except Exception as e:
+        logger.error("batch_generation_error", error=str(e), week=week)
+        raise HTTPException(status_code=500, detail=f"Batch generation failed: {str(e)}")
 
 
 # Helper functions
