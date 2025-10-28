@@ -70,5 +70,6 @@ export async function fetchOpportunities(
     throw new Error('Failed to fetch opportunities')
   }
 
-  return response.json()
+  const data = await response.json()
+  return data.opportunities || []
 }

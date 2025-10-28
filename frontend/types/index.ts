@@ -89,7 +89,7 @@ export interface Opportunity {
   team: string
   opponent: string
   week: number
-  season: number
+  season?: number
   game_time: string | null
   stat_type: string
   line_score: number
@@ -101,5 +101,7 @@ export interface Opportunity {
   key_factors: string[]
   risk_factors: string[]
   comparable_game: string | null
+  similar_situations_count?: number
+  model?: string
   created_at: string
 }
