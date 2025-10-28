@@ -10,6 +10,8 @@ from sqlalchemy import select, and_, or_, func, desc
 from typing import Dict, Any, Optional, List
 from datetime import datetime, date
 import structlog
+import uuid
+import json
 
 from app.core.database import get_db
 from app.models.nfl import (
@@ -17,7 +19,8 @@ from app.models.nfl import (
     Player,
     Game,
     PlayerGameStats,
-    TeamDefensiveStats
+    TeamDefensiveStats,
+    Prediction
 )
 from app.services.claude_prediction import get_claude_service
 from app.services.rag_narrative import get_rag_service
@@ -206,6 +209,48 @@ async def predict_prop(
             for sit in similar_situations
         ]
 
+        # Calculate edge
+        edge = prediction_result["projected_value"] - line_score
+
+        # Save prediction to database
+        prediction_id = str(uuid.uuid4())
+        db_prediction = Prediction(
+            id=prediction_id,
+            prop_id=request.prop_id,
+            player_id=str(player.id),
+            player_name=player.name,
+            player_position=player.player_position or "Unknown",
+            team=player.team_id or "Unknown",
+            opponent=opponent or "Unknown",
+            week=matchup_context.get("week", 0),
+            season=2025,
+            game_time=matchup_context.get("game_time"),
+            stat_type=stat_type,
+            line_score=line_score,
+            prediction=prediction_result["prediction"],
+            confidence=prediction_result["confidence"],
+            projected_value=prediction_result["projected_value"],
+            edge=edge,
+            reasoning=prediction_result["reasoning"],
+            key_factors=json.dumps(prediction_result.get("key_factors", [])),
+            risk_factors=json.dumps(prediction_result.get("risk_factors", [])),
+            comparable_game=prediction_result.get("comparable_game"),
+            model_version=prediction_result["model"],
+            similar_situations_count=len(similar_situations),
+            is_active=True,
+            is_archived=False
+        )
+
+        db.add(db_prediction)
+        await db.commit()
+
+        logger.info(
+            "prediction_saved",
+            prediction_id=prediction_id,
+            player=player.name,
+            edge=edge
+        )
+
         # Format response
         response = PredictionResponse(
             prop_id=request.prop_id,
@@ -240,6 +285,109 @@ async def predict_prop(
             player=request.player_name
         )
         raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
+
+
+@router.get("/opportunities")
+async def get_opportunities(
+    position: Optional[str] = Query(None, description="Filter by position (QB, RB, WR, TE)"),
+    stat_type: Optional[str] = Query(None, description="Filter by stat type"),
+    min_confidence: int = Query(0, ge=0, le=100, description="Minimum confidence threshold"),
+    min_edge: float = Query(0.0, description="Minimum edge threshold"),
+    sort_by: str = Query("edge", description="Sort by: edge, confidence, game_time"),
+    limit: int = Query(50, ge=1, le=200),
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Get best betting opportunities from cached predictions.
+
+    Returns predictions sorted by edge or confidence, with optional filters.
+    This is the main discovery endpoint for the opportunities feed.
+    """
+    try:
+        # Base query - only active predictions
+        query = select(Prediction).where(
+            and_(
+                Prediction.is_active == True,
+                Prediction.is_archived == False
+            )
+        )
+
+        # Apply filters
+        if position:
+            query = query.where(Prediction.player_position == position)
+
+        if stat_type:
+            query = query.where(Prediction.stat_type == stat_type)
+
+        if min_confidence > 0:
+            query = query.where(Prediction.confidence >= min_confidence)
+
+        if min_edge > 0:
+            query = query.where(Prediction.edge >= min_edge)
+
+        # Apply sorting
+        if sort_by == "edge":
+            query = query.order_by(desc(Prediction.edge))
+        elif sort_by == "confidence":
+            query = query.order_by(desc(Prediction.confidence))
+        elif sort_by == "game_time":
+            query = query.order_by(Prediction.game_time)
+        else:
+            query = query.order_by(desc(Prediction.edge))
+
+        # Limit results
+        query = query.limit(limit)
+
+        # Execute query
+        result = await db.execute(query)
+        predictions = result.scalars().all()
+
+        logger.info(
+            "opportunities_fetched",
+            count=len(predictions),
+            filters={"position": position, "stat_type": stat_type, "min_confidence": min_confidence}
+        )
+
+        # Format response
+        return {
+            "opportunities": [
+                {
+                    "id": pred.id,
+                    "player_name": pred.player_name,
+                    "player_position": pred.player_position,
+                    "team": pred.team,
+                    "opponent": pred.opponent,
+                    "week": pred.week,
+                    "game_time": pred.game_time,
+                    "stat_type": pred.stat_type,
+                    "line_score": pred.line_score,
+                    "prediction": pred.prediction,
+                    "confidence": pred.confidence,
+                    "projected_value": pred.projected_value,
+                    "edge": pred.edge,
+                    "reasoning": pred.reasoning,
+                    "key_factors": json.loads(pred.key_factors) if pred.key_factors else [],
+                    "risk_factors": json.loads(pred.risk_factors) if pred.risk_factors else [],
+                    "comparable_game": pred.comparable_game,
+                    "similar_situations_count": pred.similar_situations_count,
+                    "model": pred.model_version,
+                    "created_at": pred.created_at
+                }
+                for pred in predictions
+            ],
+            "count": len(predictions),
+            "filters_applied": {
+                "position": position,
+                "stat_type": stat_type,
+                "min_confidence": min_confidence,
+                "min_edge": min_edge,
+                "sort_by": sort_by
+            }
+        }
+
+    except Exception as e:
+        logger.error("get_opportunities_error", error=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/active-props")

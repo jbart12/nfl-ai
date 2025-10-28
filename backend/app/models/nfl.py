@@ -195,22 +195,44 @@ class Prediction(Base):
 
     id = Column(String, primary_key=True)
     prop_id = Column(String, ForeignKey("prizepicks_projections.id"))
-    player_id = Column(String, ForeignKey("players.id"))
+    player_id = Column(String, ForeignKey("players.id"), index=True)
+
+    # Player/Game context
+    player_name = Column(String, nullable=False, index=True)
+    player_position = Column(String, index=True)
+    team = Column(String)
+    opponent = Column(String)
+    week = Column(Integer, index=True)
+    season = Column(Integer, default=2025)
+    game_time = Column(DateTime, index=True)
+
+    # Prop details
+    stat_type = Column(String, nullable=False, index=True)
+    line_score = Column(Float, nullable=False)
 
     # Prediction details
     prediction = Column(String, nullable=False)  # OVER or UNDER
-    confidence = Column(Integer, nullable=False)  # 0-100
+    confidence = Column(Integer, nullable=False, index=True)  # 0-100
     projected_value = Column(Float, nullable=False)
+    edge = Column(Float)  # projected_value - line_score
     reasoning = Column(Text)
+    key_factors = Column(Text)  # JSON array
+    risk_factors = Column(Text)  # JSON array
+    comparable_game = Column(String)
 
     # Model info
     model_version = Column(String)
     similar_situations_count = Column(Integer)
+
+    # Status
+    is_active = Column(Boolean, default=True, index=True)  # For showing in opportunities feed
+    is_archived = Column(Boolean, default=False)
 
     # Actual outcome (filled in after game)
     actual_value = Column(Float)
     was_correct = Column(Boolean)
 
     # Timestamps
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     resolved_at = Column(DateTime)
