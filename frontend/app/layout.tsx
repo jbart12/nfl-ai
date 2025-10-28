@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,7 +21,27 @@ export default function RootLayout({
         <div className="min-h-screen flex flex-col">
           <header className="border-b">
             <div className="container mx-auto px-4 py-4">
-              <h1 className="text-2xl font-bold text-primary">NFL AI Predictions</h1>
+              <div className="flex items-center justify-between">
+                <Link href="/">
+                  <h1 className="text-2xl font-bold text-primary hover:opacity-80 transition-opacity">
+                    NFL AI Predictions
+                  </h1>
+                </Link>
+                <nav className="flex gap-6">
+                  <Link
+                    href="/opportunities"
+                    className="text-sm font-medium hover:text-primary transition-colors"
+                  >
+                    Opportunities
+                  </Link>
+                  <Link
+                    href="/predict"
+                    className="text-sm font-medium hover:text-primary transition-colors"
+                  >
+                    Predict
+                  </Link>
+                </nav>
+              </div>
             </div>
           </header>
           <main className="flex-1">

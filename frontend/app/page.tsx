@@ -10,47 +10,55 @@ export default function Home() {
             AI-Powered NFL Predictions
           </h2>
           <p className="text-xl text-muted-foreground mb-8">
-            Data-driven player prop analysis backed by 3 seasons of historical context
+            Discover the best betting opportunities with data-driven analysis
           </p>
-          <Link
-            href="/predict"
-            className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-          >
-            Get Prediction →
-          </Link>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Link
+              href="/opportunities"
+              className="inline-block bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg"
+            >
+              View Opportunities →
+            </Link>
+            <Link
+              href="/predict"
+              className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+            >
+              Search Player
+            </Link>
+          </div>
         </div>
 
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
-          <div className="p-6 border rounded-lg">
-            <div className="text-3xl mb-3">🤖</div>
-            <h3 className="text-lg font-semibold mb-2">AI-Powered Analysis</h3>
+          <div className="p-6 border rounded-lg bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950">
+            <div className="text-3xl mb-3">🎯</div>
+            <h3 className="text-lg font-semibold mb-2">Automated Discovery</h3>
             <p className="text-muted-foreground">
-              Claude Sonnet 4.5 analyzes player stats, trends, and matchups to generate confident predictions
+              System generates predictions every 6 hours for all notable props - no manual searching needed
             </p>
           </div>
 
           <div className="p-6 border rounded-lg">
             <div className="text-3xl mb-3">📊</div>
-            <h3 className="text-lg font-semibold mb-2">Historical Context</h3>
+            <h3 className="text-lg font-semibold mb-2">Edge Calculation</h3>
             <p className="text-muted-foreground">
-              RAG system finds similar situations from 1,329 game narratives across multiple seasons
+              Instantly see which props offer the best value with projected value vs. line comparison
             </p>
           </div>
 
           <div className="p-6 border rounded-lg">
-            <div className="text-3xl mb-3">🎯</div>
-            <h3 className="text-lg font-semibold mb-2">Confidence Scores</h3>
+            <div className="text-3xl mb-3">🤖</div>
+            <h3 className="text-lg font-semibold mb-2">AI-Powered Analysis</h3>
             <p className="text-muted-foreground">
-              Transparent confidence levels help you make informed decisions
+              Claude Sonnet 4.5 analyzes player stats, trends, and matchups using 1,300+ game narratives
             </p>
           </div>
 
           <div className="p-6 border rounded-lg">
-            <div className="text-3xl mb-3">📈</div>
-            <h3 className="text-lg font-semibold mb-2">Trend Analysis</h3>
+            <div className="text-3xl mb-3">🔍</div>
+            <h3 className="text-lg font-semibold mb-2">Smart Filtering</h3>
             <p className="text-muted-foreground">
-              Visual charts show recent form, season averages, and performance patterns
+              Filter by position, stat type, confidence, and edge to find your perfect opportunities
             </p>
           </div>
         </div>
@@ -64,9 +72,9 @@ export default function Home() {
                 1
               </span>
               <div>
-                <h4 className="font-semibold mb-1">Enter Player & Prop</h4>
+                <h4 className="font-semibold mb-1">Automated Prediction Generation</h4>
                 <p className="text-sm text-muted-foreground">
-                  Search for any NFL player and select the prop you want to analyze
+                  Every 6 hours, the system analyzes upcoming games and generates predictions for all notable props
                 </p>
               </div>
             </li>
@@ -75,9 +83,9 @@ export default function Home() {
                 2
               </span>
               <div>
-                <h4 className="font-semibold mb-1">AI Analyzes Data</h4>
+                <h4 className="font-semibold mb-1">Browse Opportunities by Edge</h4>
                 <p className="text-sm text-muted-foreground">
-                  Our system finds similar historical situations from 1,300+ games and analyzes current season trends
+                  View predictions sorted by edge (projected value vs line) to find the best opportunities
                 </p>
               </div>
             </li>
@@ -86,19 +94,19 @@ export default function Home() {
                 3
               </span>
               <div>
-                <h4 className="font-semibold mb-1">Get Prediction & Reasoning</h4>
+                <h4 className="font-semibold mb-1">Filter & Analyze</h4>
                 <p className="text-sm text-muted-foreground">
-                  Receive OVER/UNDER prediction with confidence score, key factors, and full AI reasoning
+                  Filter by position, stat type, confidence, and edge. Expand predictions to see full AI reasoning and historical context
                 </p>
               </div>
             </li>
           </ol>
 
           <Link
-            href="/predict"
-            className="mt-6 inline-block w-full text-center bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+            href="/opportunities"
+            className="mt-6 inline-block w-full text-center bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-700 transition-all"
           >
-            Try it Now →
+            View Opportunities →
           </Link>
         </div>
 

@@ -71,3 +71,35 @@ export interface PredictionRequest {
   line_score: number
   opponent?: string
 }
+
+// Opportunities feed types
+export interface OpportunityFilters {
+  position?: string
+  stat_type?: string
+  min_confidence?: number
+  min_edge?: number
+  sort_by?: 'edge' | 'confidence' | 'game_time'
+  limit?: number
+}
+
+export interface Opportunity {
+  id: string
+  player_name: string
+  player_position: string
+  team: string
+  opponent: string
+  week: number
+  season: number
+  game_time: string | null
+  stat_type: string
+  line_score: number
+  prediction: 'OVER' | 'UNDER'
+  confidence: number
+  projected_value: number
+  edge: number
+  reasoning: string
+  key_factors: string[]
+  risk_factors: string[]
+  comparable_game: string | null
+  created_at: string
+}
