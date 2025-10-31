@@ -20,12 +20,40 @@ export default function OpportunitiesPage() {
     loadOpportunities()
   }, [filters])
 
+  const deduplicateOpportunities = (opps: Opportunity[]): Opportunity[] => {
+    // Keep only the middle line per player per stat type
+    // Group by player + stat type, then pick the median line
+    const groups = new Map<string, Opportunity[]>()
+
+    opps.forEach(opp => {
+      const key = `${opp.player_name}_${opp.stat_type}`
+      if (!groups.has(key)) {
+        groups.set(key, [])
+      }
+      groups.get(key)!.push(opp)
+    })
+
+    const result: Opportunity[] = []
+    groups.forEach((opportunities) => {
+      // Sort by line_score
+      opportunities.sort((a, b) => a.line_score - b.line_score)
+
+      // Pick the middle one (median)
+      const middleIndex = Math.floor(opportunities.length / 2)
+      result.push(opportunities[middleIndex])
+    })
+
+    return result
+  }
+
   const loadOpportunities = async () => {
     setLoading(true)
     setError(null)
     try {
       const data = await fetchOpportunities(filters)
-      setOpportunities(data)
+      // Deduplicate to show only one prediction per player per stat type
+      const deduplicated = deduplicateOpportunities(data)
+      setOpportunities(deduplicated)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load opportunities')
     } finally {

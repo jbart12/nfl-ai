@@ -51,6 +51,7 @@ class Game(Base):
     week = Column(Integer, nullable=False, index=True)
     game_date = Column(Date, index=True)
     game_time = Column(DateTime)
+    slate = Column(String, index=True)  # THURSDAY, SUNDAY_EARLY, SUNDAY_LATE, SUNDAY_NIGHT, MONDAY, SATURDAY
 
     # Teams
     home_team_id = Column(String, ForeignKey("teams.id"))
@@ -205,6 +206,7 @@ class Prediction(Base):
     week = Column(Integer, index=True)
     season = Column(Integer, default=2025)
     game_time = Column(DateTime, index=True)
+    slate = Column(String, index=True)  # THURSDAY, SUNDAY_EARLY, SUNDAY_LATE, SUNDAY_NIGHT, MONDAY, SATURDAY
 
     # Prop details
     stat_type = Column(String, nullable=False, index=True)

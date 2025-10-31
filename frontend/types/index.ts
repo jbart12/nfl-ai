@@ -76,6 +76,7 @@ export interface PredictionRequest {
 export interface OpportunityFilters {
   position?: string
   stat_type?: string
+  slate?: string
   min_confidence?: number
   min_edge?: number
   sort_by?: 'edge' | 'confidence' | 'game_time'
@@ -91,6 +92,7 @@ export interface Opportunity {
   week: number
   season?: number
   game_time: string | null
+  slate: string | null
   stat_type: string
   line_score: number
   prediction: 'OVER' | 'UNDER'

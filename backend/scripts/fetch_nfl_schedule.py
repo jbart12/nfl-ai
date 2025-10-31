@@ -16,8 +16,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import AsyncSessionLocal
 from app.models.nfl import Game, Team
 from app.services.sleeper_stats import get_sleeper_stats_service
+from app.utils.slate import determine_slate
 import structlog
 import httpx
+from datetime import datetime
 
 logger = structlog.get_logger()
 
@@ -120,6 +122,24 @@ async def fetch_schedule(season: str = "2025", weeks: list = None):
                         status = competition.get("status", {})
                         is_completed = status.get("type", {}).get("completed", False)
 
+                        # Parse game time
+                        game_time = None
+                        game_date_str = event.get("date")
+                        if game_date_str:
+                            try:
+                                game_time = datetime.fromisoformat(game_date_str.replace('Z', '+00:00'))
+                                # Convert to naive datetime (UTC) for database storage
+                                game_time = game_time.replace(tzinfo=None)
+                            except:
+                                pass
+
+                        # Determine slate from game time (need to make aware for slate calculation)
+                        import pytz
+                        slate = None
+                        if game_time:
+                            game_time_aware = pytz.utc.localize(game_time)
+                            slate = determine_slate(game_time_aware)
+
                         # Create game ID
                         game_id = f"{season}_{week}_{away_team}_{home_team}"
 
@@ -133,12 +153,18 @@ async def fetch_schedule(season: str = "2025", weeks: list = None):
                                 existing_game.home_score = int(home_score) if home_score else None
                                 existing_game.is_completed = True
                                 games_updated += 1
+                            # Update game time and slate if not set
+                            if game_time and not existing_game.game_time:
+                                existing_game.game_time = game_time
+                                existing_game.slate = slate
                         else:
                             # Create new game
                             new_game = Game(
                                 id=game_id,
                                 season=int(season),
                                 week=week,
+                                game_time=game_time,
+                                slate=slate,
                                 home_team_id=home_team,
                                 away_team_id=away_team,
                                 home_score=int(home_score) if home_score and is_completed else None,

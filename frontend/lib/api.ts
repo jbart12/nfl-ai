@@ -58,6 +58,7 @@ export async function fetchOpportunities(
 
   if (filters.position) params.append('position', filters.position)
   if (filters.stat_type) params.append('stat_type', filters.stat_type)
+  if (filters.slate) params.append('slate', filters.slate)
   if (filters.min_confidence !== undefined) params.append('min_confidence', filters.min_confidence.toString())
   if (filters.min_edge !== undefined) params.append('min_edge', filters.min_edge.toString())
   if (filters.sort_by) params.append('sort_by', filters.sort_by)

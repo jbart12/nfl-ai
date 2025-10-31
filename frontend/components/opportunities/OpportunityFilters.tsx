@@ -21,7 +21,7 @@ export function OpportunityFilters({ filters, onFiltersChange }: OpportunityFilt
         <h2 className="text-lg font-semibold">Filters</h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
         {/* Position Filter */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -58,6 +58,26 @@ export function OpportunityFilters({ filters, onFiltersChange }: OpportunityFilt
             <option value="receiving_yards">Receiving Yards</option>
             <option value="receptions">Receptions</option>
             <option value="receiving_touchdowns">Receiving TDs</option>
+          </select>
+        </div>
+
+        {/* Slate Filter */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Game Slate
+          </label>
+          <select
+            value={filters.slate || ''}
+            onChange={(e) => updateFilter('slate', e.target.value || undefined)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">All Slates</option>
+            <option value="THURSDAY">Thursday Night</option>
+            <option value="SATURDAY">Saturday</option>
+            <option value="SUNDAY_EARLY">Sunday Early (1PM ET)</option>
+            <option value="SUNDAY_LATE">Sunday Late (4PM ET)</option>
+            <option value="SUNDAY_NIGHT">Sunday Night</option>
+            <option value="MONDAY">Monday Night</option>
           </select>
         </div>
 

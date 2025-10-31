@@ -32,6 +32,19 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
     })
   }
 
+  const formatSlate = (slate: string | null) => {
+    if (!slate) return null
+    const slateMap: { [key: string]: string } = {
+      'THURSDAY': 'Thursday Night',
+      'SATURDAY': 'Saturday',
+      'SUNDAY_EARLY': 'Sunday 1PM ET',
+      'SUNDAY_LATE': 'Sunday 4PM ET',
+      'SUNDAY_NIGHT': 'Sunday Night',
+      'MONDAY': 'Monday Night'
+    }
+    return slateMap[slate] || slate
+  }
+
   const getEdgeColor = (edge: number) => {
     if (edge >= 10) return 'text-green-600 bg-green-50'
     if (edge >= 5) return 'text-emerald-600 bg-emerald-50'
@@ -65,6 +78,11 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
               <Calendar className="w-4 h-4" />
               <span>Week {opportunity.week}</span>
             </div>
+            {opportunity.slate && (
+              <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">
+                {formatSlate(opportunity.slate)}
+              </Badge>
+            )}
             {opportunity.game_time && (
               <div className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
