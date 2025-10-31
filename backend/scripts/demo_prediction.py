@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from sqlalchemy import select
 from app.core.database import AsyncSessionLocal
-from app.models.nfl import Player, PlayerGameStats
+from app.models.nfl import Player, PlayerGameStats, PrizePicksProjection
 from app.services.claude_prediction import get_claude_service
 from app.services.rag_narrative import get_rag_service
 from app.api.endpoints.predictions import (
@@ -64,11 +64,33 @@ async def run_prediction():
         print(f"   ✓ Week: {current_week}")
         print()
 
-        # 3. Gather stats
-        print("3. Gathering player statistics...")
+        # 3. Get real line from PrizePicks
+        print("3. Fetching real betting line from PrizePicks...")
         stat_type = "passing_yards"
-        line_score = 265.5
 
+        # Query PrizePicks for this player's passing yards line
+        props_query = select(PrizePicksProjection).where(
+            PrizePicksProjection.player_name == player.name,
+            PrizePicksProjection.stat_type == stat_type,
+            PrizePicksProjection.is_active == True
+        )
+        props_result = await db.execute(props_query)
+        props = props_result.scalars().all()
+
+        if props:
+            # Use smart main line detection
+            lines = [p.line_score for p in props]
+            sorted_lines = sorted(lines)
+            line_score = sorted_lines[len(sorted_lines) // 2]  # Use median
+            print(f"   ✓ Found real line: {line_score} yards (from {len(lines)} available lines)")
+        else:
+            # Fallback if no props available
+            line_score = 265.5
+            print(f"   ⚠ No PrizePicks props found, using fallback: {line_score}")
+        print()
+
+        # 4. Gather player statistics
+        print("4. Gathering player statistics...")
         current_stats = await _get_current_season_stats(db, player.id, stat_type)
 
         print(f"   Season Stats (2025):")
@@ -78,8 +100,8 @@ async def run_prediction():
         print(f"   - Range: {current_stats.get('min', 0)} - {current_stats.get('max', 0)} yards")
         print()
 
-        # 4. Get matchup context
-        print("4. Analyzing matchup...")
+        # 5. Get matchup context
+        print("5. Analyzing matchup...")
         matchup_context = await _get_matchup_context(db, player, opponent)
         injury_context = await _get_injury_context(db, player.id)
 
@@ -87,8 +109,8 @@ async def run_prediction():
         print(f"   Location: {matchup_context.get('location', 'Unknown')}")
         print()
 
-        # 5. RAG Search
-        print("5. Finding similar situations (RAG)...")
+        # 6. RAG Search
+        print("6. Finding similar situations (RAG)...")
         try:
             rag_service = get_rag_service()
             context_description = _build_context_description(
@@ -111,8 +133,8 @@ async def run_prediction():
             similar_situations = []
         print()
 
-        # 6. Generate prediction
-        print("6. Generating AI prediction...")
+        # 7. Generate prediction
+        print("7. Generating AI prediction...")
         print()
 
         prop_context = {

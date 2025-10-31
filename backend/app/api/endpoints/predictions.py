@@ -119,6 +119,8 @@ async def predict_prop(
 
         opponent = validated_opponent_data["opponent"]
         current_week = validated_opponent_data["week"]
+        game_time = validated_opponent_data.get("game_time")
+        slate = validated_opponent_data.get("slate")
 
         logger.info(
             "prediction_request",
@@ -225,7 +227,8 @@ async def predict_prop(
             opponent=opponent or "Unknown",
             week=matchup_context.get("week", 0),
             season=2025,
-            game_time=matchup_context.get("game_time"),
+            game_time=game_time,
+            slate=slate,
             stat_type=stat_type,
             line_score=line_score,
             prediction=prediction_result["prediction"],
@@ -292,6 +295,7 @@ async def predict_prop(
 async def get_opportunities(
     position: Optional[str] = Query(None, description="Filter by position (QB, RB, WR, TE)"),
     stat_type: Optional[str] = Query(None, description="Filter by stat type"),
+    slate: Optional[str] = Query(None, description="Filter by slate (THURSDAY, SUNDAY_EARLY, SUNDAY_LATE, SUNDAY_NIGHT, MONDAY, SATURDAY)"),
     min_confidence: int = Query(0, ge=0, le=100, description="Minimum confidence threshold"),
     min_edge: float = Query(0.0, description="Minimum edge threshold"),
     sort_by: str = Query("edge", description="Sort by: edge, confidence, game_time"),
@@ -305,6 +309,12 @@ async def get_opportunities(
     This is the main discovery endpoint for the opportunities feed.
     """
     try:
+        # IMPORTANT: Always cleanup stale predictions before returning data
+        # This ensures users NEVER see outdated predictions
+        from app.services.prediction_freshness import get_freshness_service
+        freshness_service = get_freshness_service()
+        await freshness_service.cleanup_stale_predictions(db)
+
         # Base query - only active predictions
         query = select(Prediction).where(
             and_(
@@ -319,6 +329,9 @@ async def get_opportunities(
 
         if stat_type:
             query = query.where(Prediction.stat_type == stat_type)
+
+        if slate:
+            query = query.where(Prediction.slate == slate)
 
         if min_confidence > 0:
             query = query.where(Prediction.confidence >= min_confidence)
@@ -360,6 +373,7 @@ async def get_opportunities(
                     "opponent": pred.opponent,
                     "week": pred.week,
                     "game_time": pred.game_time,
+                    "slate": pred.slate,
                     "stat_type": pred.stat_type,
                     "line_score": pred.line_score,
                     "prediction": pred.prediction,
@@ -380,6 +394,7 @@ async def get_opportunities(
             "filters_applied": {
                 "position": position,
                 "stat_type": stat_type,
+                "slate": slate,
                 "min_confidence": min_confidence,
                 "min_edge": min_edge,
                 "sort_by": sort_by
@@ -758,7 +773,9 @@ async def _validate_and_get_opponent(
 
         return {
             "opponent": actual_opponent,
-            "week": current_week
+            "week": current_week,
+            "game_time": game.game_time,
+            "slate": game.slate
         }
 
     except Exception as e:

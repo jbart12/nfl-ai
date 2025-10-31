@@ -13,36 +13,14 @@ import asyncio
 import uuid
 import json
 
-from app.models.nfl import Player, Game, Prediction
+from app.models.nfl import Player, Game, Prediction, PrizePicksProjection
 from app.services.claude_prediction import get_claude_service
 from app.services.rag_narrative import get_rag_service
 
 logger = structlog.get_logger()
 
-
-# Define common prop lines for each position and stat type
-NOTABLE_PROPS = {
-    "QB": {
-        "passing_yards": [225.5, 250.5, 275.5],
-        "passing_touchdowns": [1.5, 2.5],
-        "interceptions": [0.5, 1.5],
-    },
-    "RB": {
-        "rushing_yards": [50.5, 75.5, 100.5],
-        "rushing_touchdowns": [0.5],
-        "receptions": [2.5, 3.5, 4.5],
-    },
-    "WR": {
-        "receiving_yards": [50.5, 75.5, 100.5],
-        "receptions": [3.5, 4.5, 5.5, 6.5],
-        "receiving_touchdowns": [0.5],
-    },
-    "TE": {
-        "receiving_yards": [35.5, 50.5, 65.5],
-        "receptions": [2.5, 3.5, 4.5],
-        "receiving_touchdowns": [0.5],
-    }
-}
+# Prediction version - increment when logic changes to invalidate old predictions
+PREDICTION_VERSION = "v2_prizepicks"  # v2 = Real PrizePicks lines with smart detection
 
 
 class BatchPredictionService:
@@ -51,6 +29,85 @@ class BatchPredictionService:
     def __init__(self):
         self.claude_service = get_claude_service()
         self.rag_service = get_rag_service()
+
+    def _names_match(self, name1: str, name2: str) -> bool:
+        """
+        Check if two player names match (with fuzzy logic).
+
+        Handles common differences like:
+        - "Ja'Marr Chase" vs "JaMarr Chase"
+        - "D.K. Metcalf" vs "DK Metcalf"
+        - Case differences
+        """
+        # Normalize: lowercase, remove punctuation, remove extra spaces
+        def normalize(name):
+            import re
+            name = name.lower()
+            name = re.sub(r"['\.\-]", "", name)  # Remove apostrophes, dots, hyphens
+            name = re.sub(r"\s+", " ", name).strip()  # Normalize whitespace
+            return name
+
+        return normalize(name1) == normalize(name2)
+
+    def _detect_main_line(self, lines: List[float], all_lines_for_stat: List[float]) -> float:
+        """
+        Detect the "main line" from a list of prop lines.
+
+        Uses multiple heuristics:
+        1. Excludes extreme outliers (very high/low lines)
+        2. Prefers lines that are common across many players (standard lines)
+        3. Picks from the middle-lower range (40-50th percentile)
+
+        Args:
+            lines: List of lines for this specific player/stat
+            all_lines_for_stat: All lines across all players for this stat type
+
+        Returns:
+            The most likely "main line"
+        """
+        if not lines:
+            return None
+
+        # If only one line, return it
+        if len(lines) == 1:
+            return lines[0]
+
+        sorted_lines = sorted(lines)
+
+        # Strategy 1: If 5+ lines, exclude extremes (top 20% and bottom 20%)
+        if len(sorted_lines) >= 5:
+            # Remove top 20% and bottom 20%
+            trim_count = max(1, len(sorted_lines) // 5)
+            trimmed_lines = sorted_lines[trim_count:-trim_count]
+
+            if trimmed_lines:
+                sorted_lines = trimmed_lines
+
+        # Strategy 2: Find the most common lines across all players
+        # Lines that appear frequently are more likely to be "main" lines
+        from collections import Counter
+        line_frequency = Counter(all_lines_for_stat)
+
+        # Score each line by:
+        # - How common it is across players (higher = more likely main)
+        # - How close to center of remaining range (closer = more likely main)
+        scored_lines = []
+        for line in sorted_lines:
+            # Frequency score (0-1)
+            frequency_score = min(line_frequency.get(line, 1) / 10, 1.0)
+
+            # Position score - prefer lines in 40-60th percentile
+            position = sorted_lines.index(line) / max(len(sorted_lines) - 1, 1)
+            # Score peaks at 0.5 (middle), ranges from 0 to 1
+            position_score = 1.0 - abs(position - 0.5) * 2
+
+            # Combined score
+            total_score = (frequency_score * 0.6) + (position_score * 0.4)
+            scored_lines.append((line, total_score))
+
+        # Return line with highest score
+        best_line = max(scored_lines, key=lambda x: x[1])[0]
+        return best_line
 
     async def generate_weekly_predictions(
         self,
@@ -113,15 +170,38 @@ class BatchPredictionService:
 
         logger.info("players_found", count=len(players))
 
+        # Get all active PrizePicks props for analysis
+        props_query = select(PrizePicksProjection).where(
+            PrizePicksProjection.is_active == True
+        )
+        result = await db.execute(props_query)
+        all_props = result.scalars().all()
+
+        # Build lookups:
+        # 1. (player_name, stat_type) -> list of lines for that player
+        # 2. stat_type -> all lines for that stat type (across all players)
+        props_by_player = {}
+        all_lines_by_stat = {}
+
+        for prop in all_props:
+            # Per-player lookup
+            key = (prop.player_name, prop.stat_type)
+            if key not in props_by_player:
+                props_by_player[key] = []
+            props_by_player[key].append(prop.line_score)
+
+            # All lines for this stat type
+            if prop.stat_type not in all_lines_by_stat:
+                all_lines_by_stat[prop.stat_type] = []
+            all_lines_by_stat[prop.stat_type].append(prop.line_score)
+
+        logger.info("prizepicks_props_loaded", count=len(all_props))
+
         # Generate predictions for each player/prop combination
         predictions_generated = 0
         predictions_failed = 0
 
         for player in players:
-            position = player.player_position
-            if position not in NOTABLE_PROPS:
-                continue
-
             # Find this player's game
             player_game = None
             opponent = None
@@ -138,67 +218,85 @@ class BatchPredictionService:
             if not player_game:
                 continue
 
-            # Generate predictions for each notable prop for this position
-            for stat_type, lines in NOTABLE_PROPS[position].items():
-                for line_score in lines:
-                    try:
-                        # Check if prediction already exists
-                        existing_query = select(Prediction).where(
-                            and_(
-                                Prediction.player_id == str(player.id),
-                                Prediction.stat_type == stat_type,
-                                Prediction.line_score == line_score,
-                                Prediction.week == week,
-                                Prediction.is_active == True
-                            )
+            # Get props for this player
+            player_props = []
+            for (prop_player_name, stat_type), lines in props_by_player.items():
+                # Fuzzy match player name (handle minor differences)
+                if self._names_match(player.name, prop_player_name):
+                    # Use smart main line detection
+                    if lines:
+                        main_line = self._detect_main_line(
+                            lines,
+                            all_lines_by_stat.get(stat_type, [])
                         )
-                        result = await db.execute(existing_query)
-                        existing = result.scalar_one_or_none()
+                        if main_line:
+                            player_props.append((stat_type, main_line))
 
-                        if existing:
-                            logger.debug(
-                                "prediction_exists_skipping",
-                                player=player.name,
-                                stat_type=stat_type,
-                                line=line_score
-                            )
-                            continue
+            if not player_props:
+                logger.debug("no_props_found", player=player.name)
+                continue
 
-                        # Generate prediction
-                        prediction_result = await self._generate_single_prediction(
-                            db=db,
-                            player=player,
-                            stat_type=stat_type,
-                            line_score=line_score,
-                            opponent=opponent,
-                            week=week,
-                            game_time=player_game.game_time
+            # Generate predictions for each prop
+            for stat_type, line_score in player_props:
+                try:
+                    # Check if prediction already exists
+                    existing_query = select(Prediction).where(
+                        and_(
+                            Prediction.player_id == str(player.id),
+                            Prediction.stat_type == stat_type,
+                            Prediction.line_score == line_score,
+                            Prediction.week == week,
+                            Prediction.is_active == True
                         )
+                    )
+                    result = await db.execute(existing_query)
+                    existing = result.scalar_one_or_none()
 
-                        if prediction_result:
-                            predictions_generated += 1
-                            logger.info(
-                                "prediction_generated",
-                                player=player.name,
-                                stat_type=stat_type,
-                                line=line_score,
-                                prediction=prediction_result.get("prediction"),
-                                confidence=prediction_result.get("confidence")
-                            )
-                        else:
-                            predictions_failed += 1
-
-                        # Rate limiting - don't overwhelm the APIs
-                        await asyncio.sleep(0.5)
-
-                    except Exception as e:
-                        predictions_failed += 1
-                        logger.error(
-                            "prediction_generation_error",
+                    if existing:
+                        logger.debug(
+                            "prediction_exists_skipping",
                             player=player.name,
                             stat_type=stat_type,
-                            error=str(e)
+                            line=line_score
                         )
+                        continue
+
+                    # Generate prediction
+                    prediction_result = await self._generate_single_prediction(
+                        db=db,
+                        player=player,
+                        stat_type=stat_type,
+                        line_score=line_score,
+                        opponent=opponent,
+                        week=week,
+                        game_time=player_game.game_time,
+                        slate=player_game.slate
+                    )
+
+                    if prediction_result:
+                        predictions_generated += 1
+                        logger.info(
+                            "prediction_generated",
+                            player=player.name,
+                            stat_type=stat_type,
+                            line=line_score,
+                            prediction=prediction_result.get("prediction"),
+                            confidence=prediction_result.get("confidence")
+                        )
+                    else:
+                        predictions_failed += 1
+
+                    # Rate limiting - don't overwhelm the APIs
+                    await asyncio.sleep(0.5)
+
+                except Exception as e:
+                    predictions_failed += 1
+                    logger.error(
+                        "prediction_generation_error",
+                        player=player.name,
+                        stat_type=stat_type,
+                        error=str(e)
+                    )
 
         logger.info(
             "batch_predictions_complete",
@@ -222,7 +320,8 @@ class BatchPredictionService:
         line_score: float,
         opponent: str,
         week: int,
-        game_time: Optional[datetime] = None
+        game_time: Optional[datetime] = None,
+        slate: Optional[str] = None
     ) -> Optional[Dict[str, Any]]:
         """Generate a single prediction and save it to the database"""
         try:
@@ -294,6 +393,7 @@ class BatchPredictionService:
                 week=week,
                 season=2025,
                 game_time=game_time,
+                slate=slate,
                 stat_type=stat_type,
                 line_score=line_score,
                 prediction=prediction_result["prediction"],
@@ -304,7 +404,7 @@ class BatchPredictionService:
                 key_factors=json.dumps(prediction_result.get("key_factors", [])),
                 risk_factors=json.dumps(prediction_result.get("risk_factors", [])),
                 comparable_game=prediction_result.get("comparable_game"),
-                model_version=prediction_result["model"],
+                model_version=PREDICTION_VERSION,  # Use our version to track prediction logic changes
                 similar_situations_count=len(similar_situations),
                 is_active=True,
                 is_archived=False
